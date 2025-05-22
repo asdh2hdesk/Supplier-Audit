@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Audit Checklist Tree View -->
+    <record id="view_audit_checklist_tree" model="ir.ui.view">
+        <field name="name">audit.checklist.tree</field>
+        <field name="model">audit.checklist</field>
+        <field name="arch" type="xml">
+            <tree string="Audit Checklists">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="version"/>
+                <field name="total_questions"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Audit Checklist Form View -->
+    <record id="view_audit_checklist_form" model="ir.ui.view">
+        <field name="name">audit.checklist.form</field>
+        <field name="model">audit.checklist</field>
+        <field name="arch" type="xml">
+            <form string="Audit Checklist">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="e.g. Quality Management System Audit"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="e.g. QMS-2023"/>
+                            <field name="version"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="total_questions" readonly="1"/>
+                            <field name="category_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Questions">
+                            <field name="question_ids">
+                                <tree string="Questions" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="category_id"/>
+                                    <field name="name"/>
+                                    <field name="question_type"/>
+                                    <field name="weight"/>
+                                    <field name="reference"/>
+                                </tree>
+                                <form string="Question">
+                                    <group>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="category_id"/>
+                                            <field name="question_type"/>
+                                            <field name="reference"/>
+                                        </group>
+                                        <group>
+                                            <field name="sequence"/>
+                                            <field name="weight"/>
+                                        </group>
+                                    </group>
+                                    <group string="Guidance">
+                                        <field name="guidance" nolabel="1" placeholder="Add guidance or instructions for this question..."/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Description">
+                            <field name="description" placeholder="Add a detailed description about this checklist..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Audit Question Categories Form View -->
+    <record id="view_question_category_form" model="ir.ui.view">
+        <field name="name">audit.question.category.form</field>
+        <field name="model">audit.question.category</field>
+        <field name="arch" type="xml">
+            <form string="Question Category">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="e.g. Quality Control"/>
+                            <field name="sequence"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                        <group>
+                            <field name="question_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <separator string="Description"/>
+                        <field name="description" placeholder="Describe the purpose of this category..."/>
+
+                    <notebook>
+                        <page string="Questions">
+                            <field name="question_ids" readonly="1">
+                                <tree string="Questions">
+                                    <field name="name"/>
+                                    <field name="question_type"/>
+                                    <field name="reference"/>
+                                    <field name="weight"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Audit Question Categories Tree View -->
+    <record id="view_question_category_tree" model="ir.ui.view">
+        <field name="name">audit.question.category.tree</field>
+        <field name="model">audit.question.category</field>
+        <field name="arch" type="xml">
+            <tree string="Question Categories">
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+                <field name="question_count"/>
+                <field name="color" widget="color"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Audit Checklist Search View -->
+    <record id="view_audit_checklist_search" model="ir.ui.view">
+        <field name="name">audit.checklist.search</field>
+        <field name="model">audit.checklist</field>
+        <field name="arch" type="xml">
+            <search string="Search Audit Checklists">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="version"/>
+                <filter string="Active" name="active" domain="[('active','=',True)]"/>
+                <filter string="Archived" name="archived" domain="[('active','=',False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Categories" name="group_by_category" context="{'group_by': 'category_ids'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Audit Checklist Action -->
+    <record id="action_audit_checklists" model="ir.actions.act_window">
+        <field name="name">Audit Checklists</field>
+        <field name="res_model">audit.checklist</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first audit checklist
+            </p>
+            <p>
+                Define checklists to standardize supplier audit questions and ensure consistent evaluations.
+            </p>
+        </field>
+    </record>
+
+    <!-- Audit Question Categories Action -->
+    <record id="action_question_categories" model="ir.actions.act_window">
+        <field name="name">Question Categories</field>
+        <field name="res_model">audit.question.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first question category
+            </p>
+            <p>
+                Organize audit questions into categories for better structure and reporting.
+            </p>
+        </field>
+    </record>
+</odoo>

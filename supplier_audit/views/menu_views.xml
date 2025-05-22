@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <data>-->
+        <menuitem id="menu_supplier_audit_root" name="Supplier Audits" sequence="30"/>
+        <!-- Operations Menu -->
+        <menuitem id="menu_supplier_audit_operations" name="Operations" parent="menu_supplier_audit_root"
+                  sequence="10"/>
+        <menuitem id="menu_supplier_audits" action="action_supplier_audits" parent="menu_supplier_audit_operations"
+                  sequence="10"/>
+        <menuitem id="menu_audit_findings" action="action_audit_findings" parent="menu_supplier_audit_operations"
+                  sequence="20"/>
+        <menuitem id="menu_corrective_actions" action="action_corrective_actions"
+                  parent="menu_supplier_audit_operations" sequence="30"/>
+
+        <!-- Configuration Menu -->
+        <menuitem id="menu_supplier_audit_configuration" name="Configuration" parent="menu_supplier_audit_root"
+                  sequence="20"/>
+        <menuitem id="menu_audit_checklists" action="action_audit_checklists" parent="menu_supplier_audit_configuration"
+                  sequence="10"/>
+        <menuitem id="menu_question_categories" action="action_question_categories"
+                  parent="menu_supplier_audit_configuration" sequence="20"/>
+<!--    </data>-->
+</odoo>

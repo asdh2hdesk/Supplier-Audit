@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Audit Finding Tree View -->
+    <record id="view_audit_finding_tree" model="ir.ui.view">
+        <field name="name">audit.finding.tree</field>
+        <field name="model">audit.finding</field>
+        <field name="arch" type="xml">
+            <tree string="Audit Findings">
+                <field name="name"/>
+                <field name="audit_id"/>
+                <field name="partner_id"/>
+                <field name="severity"/>
+                <field name="finding_date"/>
+                <field name="due_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Audit Finding Form View -->
+    <record id="view_audit_finding_form" model="ir.ui.view">
+        <field name="name">audit.finding.form</field>
+        <field name="model">audit.finding</field>
+        <field name="arch" type="xml">
+            <form string="Audit Finding">
+                <header>
+                    <button name="action_create_corrective_action" type="object" string="Create Corrective Action" class="oe_highlight" attrs="{'invisible': [('state', '=', 'closed')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="open,action_defined,in_progress,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="audit_id" attrs="{'readonly': [('state', '!=', 'open')]}"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="finding_date"/>
+                            <field name="due_date"/>
+                        </group>
+                        <group>
+                            <field name="severity"/>
+                            <field name="category_id" readonly="1"/>
+                            <field name="question_line_id" attrs="{'readonly': [('state', '!=', 'open')]}"/>
+                            <field name="assigned_to"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" nolabel="1" placeholder="Describe the finding..."/>
+                        </page>
+                        <page string="Details">
+                            <group>
+                                <field name="standard_reference" placeholder="e.g. ISO 9001:2015 Clause 8.2"/>
+                                <field name="evidence" placeholder="Provide evidence or observations..."/>
+                                <field name="root_cause" placeholder="Analyze the root cause..."/>
+                            </group>
+                        </page>
+                        <page string="Corrective Actions">
+                            <field name="corrective_action_ids">
+                                <tree string="Corrective Actions">
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="action_type"/>
+                                    <field name="due_date"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Attachments">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Audit Finding Search View -->
+    <record id="view_audit_finding_search" model="ir.ui.view">
+        <field name="name">audit.finding.search</field>
+        <field name="model">audit.finding</field>
+        <field name="arch" type="xml">
+            <search string="Search Audit Findings">
+                <field name="name"/>
+                <field name="audit_id"/>
+                <field name="partner_id"/>
+                <field name="severity"/>
+                <filter string="Open" name="open" domain="[('state','=','open')]"/>
+                <filter string="In Progress" name="in_progress" domain="[('state','=','in_progress')]"/>
+                <filter string="Closed" name="closed" domain="[('state','=','closed')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Audit" name="group_by_audit" context="{'group_by': 'audit_id'}"/>
+                    <filter string="Supplier" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Severity" name="group_by_severity" context="{'group_by': 'severity'}"/>
+                    <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Audit Finding Action -->
+    <record id="action_audit_findings" model="ir.actions.act_window">
+        <field name="name">Audit Findings</field>
+        <field name="res_model">audit.finding</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No audit findings recorded
+            </p>
+            <p>
+                Record findings during supplier audits to document non-conformities or observations.
+            </p>
+        </field>
+    </record>
+</odoo>

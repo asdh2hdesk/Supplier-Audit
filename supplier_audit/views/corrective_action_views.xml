@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Corrective Action Tree View -->
+    <record id="view_corrective_action_tree" model="ir.ui.view">
+        <field name="name">corrective.action.tree</field>
+        <field name="model">corrective.action</field>
+        <field name="arch" type="xml">
+            <tree string="Corrective Actions">
+                <field name="name"/>
+                <field name="audit_id"/>
+                <field name="finding_id"/>
+                <field name="partner_id"/>
+                <field name="action_type"/>
+                <field name="priority"/>
+                <field name="due_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Corrective Action Form View -->
+    <record id="view_corrective_action_form" model="ir.ui.view">
+        <field name="name">corrective.action.form</field>
+        <field name="model">corrective.action</field>
+        <field name="arch" type="xml">
+            <form string="Corrective Action">
+                <header>
+                    <button name="action_set_planned" type="object" string="Plan" states="draft" class="oe_highlight"/>
+                    <button name="action_start" type="object" string="Start" states="planned" class="oe_highlight"/>
+                    <button name="action_review" type="object" string="Submit for Review" states="in_progress" class="oe_highlight"/>
+                    <button name="action_complete" type="object" string="Complete" states="review" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="draft,planned,in_progress,review"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft" states="cancelled"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,planned,in_progress,review,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="audit_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="finding_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="partner_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="action_type"/>
+                        </group>
+                        <group>
+                            <field name="priority"/>
+                            <field name="planned_date"/>
+                            <field name="due_date"/>
+                            <field name="completion_date" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="assigned_to"/>
+                            <field name="approved_by" attrs="{'required': [('state', '=', 'completed')]}"/>
+                        </group>
+                        <group>
+                            <field name="effectiveness_check_required"/>
+                            <field name="effectiveness_check_date" attrs="{'invisible': [('effectiveness_check_required', '=', False)]}"/>
+                            <field name="effectiveness_result" attrs="{'invisible': [('effectiveness_check_required', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" nolabel="1" placeholder="Describe the corrective action..."/>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" nolabel="1" placeholder="Add any additional notes..."/>
+                        </page>
+                        <page string="Attachments">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Corrective Action Search View -->
+    <record id="view_corrective_action_search" model="ir.ui.view">
+        <field name="name">corrective.action.search</field>
+        <field name="model">corrective.action</field>
+        <field name="arch" type="xml">
+            <search string="Search Corrective Actions">
+                <field name="name"/>
+                <field name="audit_id"/>
+                <field name="partner_id"/>
+                <field name="assigned_to"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="In Progress" name="in_progress" domain="[('state','=','in_progress')]"/>
+                <filter string="Completed" name="completed" domain="[('state','=','completed')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Audit" name="group_by_audit" context="{'group_by': 'audit_id'}"/>
+                    <filter string="Supplier" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Priority" name="group_by_priority" context="{'group_by': 'priority'}"/>
+                    <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Corrective Action Action -->
+    <record id="action_corrective_actions" model="ir.actions.act_window">
+        <field name="name">Corrective Actions</field>
+        <field name="res_model">corrective.action</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No corrective actions recorded
+            </p>
+            <p>
+                Track corrective actions to address audit findings and improve supplier performance.
+            </p>
+        </field>
+    </record>
+</odoo>

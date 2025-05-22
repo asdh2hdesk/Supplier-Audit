@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="supplier_audit_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="audit">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Supplier Audit Report: <span t-field="audit.name"/></h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Supplier:</strong> <span t-field="audit.partner_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Audit Date:</strong> <span t-field="audit.audit_date"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Lead Auditor:</strong> <span t-field="audit.auditor_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Result:</strong> <span t-field="audit.result"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Compliance Score:</strong> <span t-field="audit.compliance_score"/>%
+                            </div>
+                            <div class="col-6">
+                                <strong>Completion Rate:</strong> <span t-field="audit.completion_rate"/>%
+                            </div>
+                        </div>
+
+                        <h3>Summary</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Critical Findings</th>
+                                <td><span t-field="audit.critical_findings"/></td>
+                            </tr>
+                            <tr>
+                                <th>Major Findings</th>
+                                <td><span t-field="audit.major_findings"/></td>
+                            </tr>
+                            <tr>
+                                <th>Minor Findings</th>
+                                <td><span t-field="audit.minor_findings"/></td>
+                            </tr>
+                            <tr>
+                                <th>Open Actions</th>
+                                <td><span t-field="audit.open_actions"/></td>
+                            </tr>
+                        </table>
+
+                        <h3>Questions</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Question</th>
+                                    <th>Type</th>
+                                    <th>Answer</th>
+                                    <th>Evidence</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="audit.question_line_ids" t-as="question">
+                                    <td><span t-field="question.category_id"/></td>
+                                    <td><span t-field="question.name"/></td>
+                                    <td><span t-field="question.question_type"/></td>
+                                    <td>
+                                        <t t-if="question.question_type == 'compliance'">
+                                            <span t-field="question.compliance"/>
+                                        </t>
+                                        <t t-if="question.question_type == 'rating'">
+                                            <span t-field="question.rating"/>
+                                        </t>
+                                        <t t-if="question.question_type == 'text'">
+                                            <span t-field="question.text_answer"/>
+                                        </t>
+                                    </td>
+                                    <td><span t-field="question.evidence"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Findings</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Description</th>
+                                    <th>Severity</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="audit.finding_ids" t-as="finding">
+                                    <td><span t-field="finding.name"/></td>
+                                    <td><span t-field="finding.description"/></td>
+                                    <td><span t-field="finding.severity"/></td>
+                                    <td><span t-field="finding.due_date"/></td>
+                                    <td><span t-field="finding.state"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Corrective Actions</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="audit.corrective_action_ids" t-as="action">
+                                    <td><span t-field="action.name"/></td>
+                                    <td><span t-field="action.description"/></td>
+                                    <td><span t-field="action.action_type"/></td>
+                                    <td><span t-field="action.due_date"/></td>
+                                    <td><span t-field="action.state"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Notes</h3>
+                        <p><span t-field="audit.notes"/></p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_supplier_audit_user,supplier.audit.user,model_supplier_audit,group_supplier_audit_user,1,1,1,1
+access_supplier_audit_manager,supplier.audit.manager,model_supplier_audit,group_supplier_audit_manager,1,1,1,1
+access_audit_checklist_user,audit.checklist.user,model_audit_checklist,group_supplier_audit_user,1,1,1,1
+access_audit_checklist_manager,audit.checklist.manager,model_audit_checklist,group_supplier_audit_manager,1,1,1,1
+access_audit_checklist_question_user,audit.checklist.question.user,model_audit_checklist_question,group_supplier_audit_user,1,1,1,1
+access_audit_checklist_question_manager,audit.checklist.question.manager,model_audit_checklist_question,group_supplier_audit_manager,1,1,1,1
+access_audit_question_category_user,audit.question.category.user,model_audit_question_category,group_supplier_audit_user,1,1,1,1
+access_audit_question_category_manager,audit.question.category.manager,model_audit_question_category,group_supplier_audit_manager,1,1,1,1
+access_supplier_audit_question_line_user,supplier.audit.question.line.user,model_supplier_audit_question_line,group_supplier_audit_user,1,1,1,1
+access_supplier_audit_question_line_manager,supplier.audit.question.line.manager,model_supplier_audit_question_line,group_supplier_audit_manager,1,1,1,1
+access_audit_finding_user,audit.finding.user,model_audit_finding,group_supplier_audit_user,1,1,1,1
+access_audit_finding_manager,audit.finding.manager,model_audit_finding,group_supplier_audit_manager,1,1,1,1
+access_corrective_action_user,corrective.action.user,model_corrective_action,group_supplier_audit_user,1,1,1,1
+access_corrective_action_manager,corrective.action.manager,model_corrective_action,group_supplier_audit_manager,1,1,1,1
