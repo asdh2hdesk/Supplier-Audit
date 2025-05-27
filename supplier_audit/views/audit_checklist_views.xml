@@ -50,27 +50,39 @@
                                     <field name="sequence" widget="handle"/>
                                     <field name="category_id"/>
                                     <field name="name"/>
-                                    <field name="question_type"/>
-                                    <field name="weight"/>
-                                    <field name="reference"/>
+                                    <field name="evidence"/>
+                                    <field name="scoring_criteria"/>
+                                    <field name="status"/>
+                                    <field name="observation"/>
+                                    <field name="action"/>
+<!--                                    <field name="question_type"/>-->
+<!--                                    <field name="weight"/>-->
+<!--                                    <field name="reference"/>-->
                                 </tree>
-                                <form string="Question">
-                                    <group>
-                                        <group>
-                                            <field name="name"/>
-                                            <field name="category_id"/>
-                                            <field name="question_type"/>
-                                            <field name="reference"/>
-                                        </group>
-                                        <group>
-                                            <field name="sequence"/>
-                                            <field name="weight"/>
-                                        </group>
-                                    </group>
-                                    <group string="Guidance">
-                                        <field name="guidance" nolabel="1" placeholder="Add guidance or instructions for this question..."/>
-                                    </group>
-                                </form>
+<!--                                <form string="Question">-->
+<!--                                    <group>-->
+<!--                                        <group>-->
+<!--                                            <field name="sequence"/>-->
+<!--                                            <field name="name"/>-->
+<!--                                            <field name="category_id"/>-->
+<!--&lt;!&ndash;                                            <field name="question_type"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <field name="reference"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <field name="weight"/>&ndash;&gt;-->
+<!--                                        </group>-->
+<!--                                        <group>-->
+<!--                                            <field name="status"/>-->
+<!--                                            <field name="evidence"/>-->
+<!--                                            <field name="scoring_criteria"/>-->
+<!--                                        </group>-->
+<!--                                    </group>-->
+<!--&lt;!&ndash;                                    <group string="Guidance">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <field name="guidance" nolabel="1" placeholder="Add guidance or instructions for this question..."/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </group>&ndash;&gt;-->
+<!--                                    <group string="Audit Details">-->
+<!--                                        <field name="observation" placeholder="Enter observations noted during the audit..."/>-->
+<!--                                        <field name="action" placeholder="Enter actions to be taken based on audit findings..."/>-->
+<!--                                    </group>-->
+<!--                                </form>-->
                             </field>
                         </page>
                         <page string="Description">
@@ -111,10 +123,16 @@
                         <page string="Questions">
                             <field name="question_ids" readonly="1">
                                 <tree string="Questions">
+                                    <field name="sequence"/>
                                     <field name="name"/>
-                                    <field name="question_type"/>
-                                    <field name="reference"/>
-                                    <field name="weight"/>
+                                    <field name="evidence"/>
+                                    <field name="scoring_criteria"/>
+                                    <field name="status"/>
+                                    <field name="observation"/>
+                                    <field name="action"/>
+<!--                                    <field name="question_type"/>-->
+<!--                                    <field name="reference"/>-->
+<!--                                    <field name="weight"/>-->
                                 </tree>
                             </field>
                         </page>

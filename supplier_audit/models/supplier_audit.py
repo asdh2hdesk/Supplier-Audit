@@ -71,6 +71,40 @@ class SupplierAudit(models.Model):
         ('fail', 'Fail'),
     ], string='Audit Result', tracking=True)
 
+    # Category references
+    category_1_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_2_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_3_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_4_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_5_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_6_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_7_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_8_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_9_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+    category_10_id = fields.Many2one('audit.question.category', compute='_compute_category_tabs', store=True)
+
+    # Category names (used for tab labels)
+    category_1_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_2_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_3_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_4_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_5_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_6_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_7_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_8_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_9_name = fields.Char(compute='_compute_category_tabs', store=True)
+    category_10_name = fields.Char(compute='_compute_category_tabs', store=True)
+
+    @api.depends('question_line_ids.category_id')
+    def _compute_category_tabs(self):
+        for rec in self:
+            categories = rec.question_line_ids.mapped('category_id')[:10]
+            for i in range(10):
+                setattr(rec, f'category_{i + 1}_id', categories[i] if len(categories) > i else False)
+                setattr(rec, f'category_{i + 1}_name', categories[i].name if len(categories) > i else '')
+            print(f"Category 1 ID: {rec.category_1_id}, Name: {rec.category_1_name}")
+            print(f"Category 2 ID: {rec.category_2_id}, Name: {rec.category_2_name}")
+
     @api.depends('audit_date', 'end_date')
     def _compute_duration(self):
         for record in self:
@@ -83,25 +117,26 @@ class SupplierAudit(models.Model):
             else:
                 record.duration = 0
 
-    @api.depends('question_line_ids.state')
-    def _compute_progress_stats(self):
-        for record in self:
-            record.total_questions = len(record.question_line_ids)
-            record.completed_questions = len(record.question_line_ids.filtered(
-                lambda x: x.state == 'answered'))
-            record.completion_rate = (
-                        record.completed_questions / record.total_questions * 100) if record.total_questions else 0
+    #
+    # @api.depends('question_line_ids.state')
+    # def _compute_progress_stats(self):
+    #     for record in self:
+    #         record.total_questions = len(record.question_line_ids)
+    #         record.completed_questions = len(record.question_line_ids.filtered(
+    #             lambda x: x.state == 'answered'))
+    #         record.completion_rate = (
+    #                     record.completed_questions / record.total_questions * 100) if record.total_questions else 0
 
-    @api.depends('question_line_ids.compliance')
-    def _compute_compliance_score(self):
-        for record in self:
-            answered_questions = record.question_line_ids.filtered(
-                lambda x: x.state == 'answered' and x.question_type == 'compliance')
-            if answered_questions:
-                compliant_count = len(answered_questions.filtered(lambda x: x.compliance == 'compliant'))
-                record.compliance_score = (compliant_count / len(answered_questions)) * 100
-            else:
-                record.compliance_score = 0
+    # @api.depends('question_line_ids.compliance')
+    # def _compute_compliance_score(self):
+    #     for record in self:
+    #         answered_questions = record.question_line_ids.filtered(
+    #             lambda x: x.state == 'answered' and x.question_type == 'compliance')
+    #         if answered_questions:
+    #             compliant_count = len(answered_questions.filtered(lambda x: x.compliance == 'compliant'))
+    #             record.compliance_score = (compliant_count / len(answered_questions)) * 100
+    #         else:
+    #             record.compliance_score = 0
 
     @api.depends('finding_ids.severity')
     def _compute_findings_stats(self):
@@ -131,9 +166,23 @@ class SupplierAudit(models.Model):
                     'question_id': question.id,
                     'name': question.name,
                     'category_id': question.category_id.id,
-                    'question_type': question.question_type,
-                    'weight': question.weight,
+                    'evidence': question.evidence,
+                    'scoring_criteria': question.scoring_criteria,
+                    'observation': question.observation,
+                    'action': question.action,
                 })
+                print(
+                    f"Created question line with category_id: {question.category_id.id}, category_name: {question.category_id.name}")
+        # Manually trigger recompute of category tabs
+        audit._compute_category_tabs()
+
+        # Print values
+        print(audit.category_1_id)
+        print(audit.category_2_id)
+        print(audit.category_3_id)
+        print(audit.category_1_name)
+        print(audit.category_2_name)
+        print(audit.category_3_name)
 
         return audit
 
@@ -203,49 +252,23 @@ class SupplierAuditQuestionLine(models.Model):
     name = fields.Text('Question', required=True)
     sequence = fields.Integer('Sequence', default=10)
     category_id = fields.Many2one('audit.question.category', string='Category')
-
-    question_type = fields.Selection([
-        ('compliance', 'Compliance (Yes/No)'),
-        ('rating', 'Rating (1-5)'),
-        ('text', 'Text Answer'),
-    ], string='Question Type', default='compliance', required=True)
-
+    evidence = fields.Text('Evidence/Observations')
+    scoring_criteria = fields.Text('Scoring Criteria', help="Criteria for scoring the question")
+    status = fields.Selection([
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+    ], string='Status', default='0', help="Score or status of the question based on evaluation")
+    observation = fields.Text('Observation', help="Observations noted during the audit")
+    action = fields.Text('Action', help="Actions to be taken based on the audit findings")
     state = fields.Selection([
         ('pending', 'Pending'),
         ('answered', 'Answered'),
         ('na', 'Not Applicable'),
     ], string='Status', default='pending')
 
-    # For compliance questions
-    compliance = fields.Selection([
-        ('compliant', 'Compliant'),
-        ('non_compliant', 'Non-Compliant'),
-    ], string='Compliance')
-
-    # For rating questions
-    rating = fields.Selection([
-        ('1', '1 - Poor'),
-        ('2', '2 - Below Average'),
-        ('3', '3 - Average'),
-        ('4', '4 - Good'),
-        ('5', '5 - Excellent'),
-    ], string='Rating')
-
-    text_answer = fields.Text('Answer')
-    evidence = fields.Text('Evidence/Observations')
     finding_ids = fields.One2many('audit.finding', 'question_line_id', string='Related Findings')
-    weight = fields.Float('Weight', default=1.0)
-
-    @api.onchange('compliance', 'rating', 'text_answer')
-    def _onchange_answer(self):
-        if self.question_type == 'compliance' and self.compliance:
-            self.state = 'answered'
-        elif self.question_type == 'rating' and self.rating:
-            self.state = 'answered'
-        elif self.question_type == 'text' and self.text_answer:
-            self.state = 'answered'
-        else:
-            self.state = 'pending'
 
     def mark_as_not_applicable(self):
         self.state = 'na'

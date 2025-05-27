@@ -45,20 +45,30 @@ class AuditChecklistQuestion(models.Model):
     _description = 'Audit Checklist Question'
     _order = 'sequence, id'
 
+    sequence = fields.Integer('Sl. No', default=10, help="Serial number of the question")
     name = fields.Text('Question', required=True)
+    evidence = fields.Text('Evidence', help="Details of evidence required to evaluate the question")
+    scoring_criteria = fields.Text('Scoring Criteria', help="Criteria for scoring the question")
+    status = fields.Selection([
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+    ], string='Status', default='0', help="Score or status of the question based on evaluation")
+    observation = fields.Text('Observation', help="Observations noted during the audit")
+    action = fields.Text('Action', help="Actions to be taken based on the audit findings")
+
     checklist_id = fields.Many2one('audit.checklist', string='Checklist', ondelete='cascade')
     category_id = fields.Many2one('audit.question.category', string='Category')
-    sequence = fields.Integer('Sequence', default=10)
 
-    question_type = fields.Selection([
-        ('compliance', 'Compliance (Yes/No)'),
-        ('rating', 'Rating (1-5)'),
-        ('text', 'Text Answer'),
-    ], string='Question Type', default='compliance', required=True)
-
-    guidance = fields.Text('Guidance Notes')
-    reference = fields.Char('Reference')
-    weight = fields.Float('Weight', default=1.0, help="Importance factor for scoring calculations")
+    # question_type = fields.Selection([
+    #     ('compliance', 'Compliance (Yes/No)'),
+    #     ('rating', 'Rating (1-5)'),
+    #     ('text', 'Text Answer'),], string='Question Type', default='compliance', required=True)
+    #
+    # guidance = fields.Text('Guidance Notes')
+    # reference = fields.Char('Reference')
+    # weight = fields.Float('Weight', default=1.0, help="Importance factor for scoring calculations")
 
     @api.model
     def create(self, vals):

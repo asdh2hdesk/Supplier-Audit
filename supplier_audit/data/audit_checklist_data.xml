@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="category_general" model="audit.question.category">
-            <field name="name">General</field>
-            <field name="sequence">10</field>
-            <field name="description">General audit questions</field>
-        </record>
-        <record id="category_quality_control" model="audit.question.category">
-            <field name="name">Quality Control</field>
-            <field name="sequence">20</field>
-            <field name="description">Questions related to quality management</field>
-        </record>
-        <record id="checklist_default_supplier_audit" model="audit.checklist">
-            <field name="name">Default Supplier Audit Checklist</field>
-            <field name="code">SA-001</field>
-            <field name="version">1.0</field>
-            <field name="description">Standard checklist for supplier audits</field>
-            <field name="active">True</field>
-        </record>
-        <record id="question_qms_documentation" model="audit.checklist.question">
-            <field name="checklist_id" ref="checklist_default_supplier_audit"/>
-            <field name="category_id" ref="category_general"/>
-            <field name="name">Does the supplier have a documented quality management system?</field>
-            <field name="question_type">compliance</field>
-            <field name="sequence">10</field>
-            <field name="weight">2.0</field>
-            <field name="guidance">Verify the presence of a QMS documentation, such as ISO 9001 certification.</field>
-            <field name="reference">ISO 9001:2015</field>
-        </record>
-        <record id="question_quality_control_rating" model="audit.checklist.question">
-            <field name="checklist_id" ref="checklist_default_supplier_audit"/>
-            <field name="category_id" ref="category_quality_control"/>
-            <field name="name">Rate the supplier's quality control processes.</field>
-            <field name="question_type">rating</field>
-            <field name="sequence">20</field>
-            <field name="weight">1.5</field>
-            <field name="guidance">Evaluate based on inspection procedures and defect rates.</field>
-        </record>
-        <record id="question_corrective_action_process" model="audit.checklist.question">
-            <field name="checklist_id" ref="checklist_default_supplier_audit"/>
-            <field name="category_id" ref="category_quality_control"/>
-            <field name="name">Describe the supplier's corrective action process.</field>
-            <field name="question_type">text</field>
-            <field name="sequence">30</field>
-            <field name="weight">1.0</field>
-            <field name="guidance">Request a detailed explanation or documentation of the process.</field>
-        </record>
-        <record id="sequence_supplier_audit" model="ir.sequence">
-            <field name="name">Supplier Audit Sequence</field>
-            <field name="code">supplier.audit</field>
-            <field name="prefix">SA/</field>
-            <field name="padding">5</field>
-            <field name="number_next">1</field>
-            <field name="number_increment">1</field>
-        </record>
-        <record id="sequence_audit_finding" model="ir.sequence">
-            <field name="name">Audit Finding Sequence</field>
-            <field name="code">audit.finding</field>
-            <field name="prefix">FIND/</field>
-            <field name="padding">5</field>
-            <field name="number_next">1</field>
-            <field name="number_increment">1</field>
-        </record>
-        <record id="sequence_corrective_action" model="ir.sequence">
-            <field name="name">Corrective Action Sequence</field>
-            <field name="code">corrective.action</field>
-            <field name="prefix">CA/</field>
-            <field name="padding">5</field>
-            <field name="number_next">1</field>
-            <field name="number_increment">1</field>
-        </record>
+<!--        <record id="category_general" model="audit.question.category">-->
+<!--            <field name="name">General</field>-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="description">General audit questions</field>-->
+<!--        </record>-->
+<!--        <record id="category_quality_control" model="audit.question.category">-->
+<!--            <field name="name">Quality Control</field>-->
+<!--            <field name="sequence">20</field>-->
+<!--            <field name="description">Questions related to quality management</field>-->
+<!--        </record>-->
+<!--        <record id="checklist_default_supplier_audit" model="audit.checklist">-->
+<!--            <field name="name">Default Supplier Audit Checklist</field>-->
+<!--            <field name="code">SA-001</field>-->
+<!--            <field name="version">1.0</field>-->
+<!--            <field name="description">Standard checklist for supplier audits</field>-->
+<!--            <field name="active">True</field>-->
+<!--        </record>-->
+<!--        <record id="question_qms_documentation" model="audit.checklist.question">-->
+<!--            <field name="checklist_id" ref="checklist_default_supplier_audit"/>-->
+<!--            <field name="category_id" ref="category_general"/>-->
+<!--            <field name="name">Does the supplier have a documented quality management system?</field>-->
+<!--            <field name="question_type">compliance</field>-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="weight">2.0</field>-->
+<!--            <field name="guidance">Verify the presence of a QMS documentation, such as ISO 9001 certification.</field>-->
+<!--            <field name="reference">ISO 9001:2015</field>-->
+<!--        </record>-->
+<!--        <record id="question_quality_control_rating" model="audit.checklist.question">-->
+<!--            <field name="checklist_id" ref="checklist_default_supplier_audit"/>-->
+<!--            <field name="category_id" ref="category_quality_control"/>-->
+<!--            <field name="name">Rate the supplier's quality control processes.</field>-->
+<!--            <field name="question_type">rating</field>-->
+<!--            <field name="sequence">20</field>-->
+<!--            <field name="weight">1.5</field>-->
+<!--            <field name="guidance">Evaluate based on inspection procedures and defect rates.</field>-->
+<!--        </record>-->
+<!--        <record id="question_corrective_action_process" model="audit.checklist.question">-->
+<!--            <field name="checklist_id" ref="checklist_default_supplier_audit"/>-->
+<!--            <field name="category_id" ref="category_quality_control"/>-->
+<!--            <field name="name">Describe the supplier's corrective action process.</field>-->
+<!--            <field name="question_type">text</field>-->
+<!--            <field name="sequence">30</field>-->
+<!--            <field name="weight">1.0</field>-->
+<!--            <field name="guidance">Request a detailed explanation or documentation of the process.</field>-->
+<!--        </record>-->
+<!--        <record id="sequence_supplier_audit" model="ir.sequence">-->
+<!--            <field name="name">Supplier Audit Sequence</field>-->
+<!--            <field name="code">supplier.audit</field>-->
+<!--            <field name="prefix">SA/</field>-->
+<!--            <field name="padding">5</field>-->
+<!--            <field name="number_next">1</field>-->
+<!--            <field name="number_increment">1</field>-->
+<!--        </record>-->
+<!--        <record id="sequence_audit_finding" model="ir.sequence">-->
+<!--            <field name="name">Audit Finding Sequence</field>-->
+<!--            <field name="code">audit.finding</field>-->
+<!--            <field name="prefix">FIND/</field>-->
+<!--            <field name="padding">5</field>-->
+<!--            <field name="number_next">1</field>-->
+<!--            <field name="number_increment">1</field>-->
+<!--        </record>-->
+<!--        <record id="sequence_corrective_action" model="ir.sequence">-->
+<!--            <field name="name">Corrective Action Sequence</field>-->
+<!--            <field name="code">corrective.action</field>-->
+<!--            <field name="prefix">CA/</field>-->
+<!--            <field name="padding">5</field>-->
+<!--            <field name="number_next">1</field>-->
+<!--            <field name="number_increment">1</field>-->
+<!--        </record>-->
     </data>
 </odoo>
