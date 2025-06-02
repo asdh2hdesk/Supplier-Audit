@@ -105,6 +105,17 @@
                         <field name="category_8_id"/>
                         <field name="category_9_id"/>
                         <field name="category_10_id"/>
+                        <!-- Add category name fields -->
+                        <field name="category_1_name"/>
+                        <field name="category_2_name"/>
+                        <field name="category_3_name"/>
+                        <field name="category_4_name"/>
+                        <field name="category_5_name"/>
+                        <field name="category_6_name"/>
+                        <field name="category_7_name"/>
+                        <field name="category_8_name"/>
+                        <field name="category_9_name"/>
+                        <field name="category_10_name"/>
                     </group>
                     <notebook>
                         <page string="Audit Questions">
@@ -139,212 +150,176 @@
                                     </field>
                                 </page>
 
-                                <page string="category_1_name"
-                                      attrs="{'invisible': [('category_1_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_1_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <!-- Dynamic category pages using category names -->
+                                <page string="category_1_name" attrs="{'invisible': [('category_1_id','=',False)]}">
+                                    <group>
+                                        <!--                                        <label string="Category Statistics" class="o_form_label"/>-->
+                                        <!--                                        <div>-->
+                                        <field name="category_1_total_questions" widget="statinfo"
+                                               string="Questions"/>
+                                        <field name="category_1_total_score" widget="statinfo" string="Score"/>
+                                        <field name="category_1_max_score" widget="statinfo" string="Max Possible"/>
+                                        <field name="category_1_percentage" widget="progressbar"/>
+                                        <!--                                        </div>-->
+                                    </group>
+
+                                    <!-- Repeat for each category -->
+                                    <field name="category_1_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_2_name]"
-                                      attrs="{'invisible': [('category_2_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_2_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_2_name" attrs="{'invisible': [('category_2_id','=',False)]}">
+                                    <group>
+                                        <!--                                        <label string="Category Statistics" class="o_form_label"/>-->
+                                        <!--                                        <div>-->
+                                        <field name="category_2_total_questions" widget="statinfo"
+                                               string="Questions"/>
+                                        <field name="category_2_total_score" widget="statinfo" string="Score"/>
+                                        <field name="category_2_max_score" widget="statinfo" string="Max Possible"/>
+                                        <field name="category_2_percentage" widget="progressbar"/>
+                                        <!--                                        </div>-->
+                                    </group>
+                                    <field name="category_2_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_3_name]"
-                                      attrs="{'invisible': [('category_3_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_3_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_3_name" attrs="{'invisible': [('category_3_id','=',False)]}">
+                                    <group>
+                                        <!--                                        <label string="Category Statistics" class="o_form_label"/>-->
+                                        <!--                                        <div>-->
+                                        <field name="category_3_total_questions" widget="statinfo"
+                                               string="Questions"/>
+                                        <field name="category_3_total_score" widget="statinfo" string="Score"/>
+                                        <field name="category_3_max_score" widget="statinfo" string="Max Possible"/>
+                                        <field name="category_3_percentage" widget="progressbar"/>
+                                        <!--                                        </div>-->
+                                    </group>
+                                    <field name="category_3_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_4_name]"
-                                      attrs="{'invisible': [('category_4_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_4_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_4_name" attrs="{'invisible': [('category_4_id','=',False)]}">
+                                    <field name="category_4_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_5_name]"
-                                      attrs="{'invisible': [('category_5_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_5_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_5_name" attrs="{'invisible': [('category_5_id','=',False)]}">
+                                    <field name="category_5_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_6_name]"
-                                      attrs="{'invisible': [('category_6_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_6_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_6_name" attrs="{'invisible': [('category_6_id','=',False)]}">
+                                    <field name="category_6_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_7_name]"
-                                      attrs="{'invisible': [('category_7_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_7_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_7_name" attrs="{'invisible': [('category_7_id','=',False)]}">
+                                    <field name="category_7_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_8_name]"
-                                      attrs="{'invisible': [('category_8_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_8_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_8_name" attrs="{'invisible': [('category_8_id','=',False)]}">
+                                    <field name="category_8_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_9_name]"
-                                      attrs="{'invisible': [('category_9_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_9_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_9_name" attrs="{'invisible': [('category_9_id','=',False)]}">
+                                    <field name="category_9_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
-
-                                <page string="Category: [[category_10_name]"
-                                      attrs="{'invisible': [('category_10_id', '=', False)]}">
-                                    <field name="question_line_ids"
-                                           attrs="{'readonly': [('state', 'not in', ['in_progress'])]}"
-                                           domain="[('category_id', '=', category_10_id)]">
-                                        <tree editable="bottom" default_order="sequence">
-                                            <field name="sequence" widget="handle"/>
-                                            <field name="category_id"/>
+                                <page string="category_10_name" attrs="{'invisible': [('category_10_id','=',False)]}">
+                                    <field name="category_10_question_ids"
+                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
+                                        <tree editable="bottom">
                                             <field name="name"/>
+                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
-                                            <field name="state"/>
-                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
-                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
@@ -379,12 +354,65 @@
                         </page>
                     </notebook>
                 </sheet>
-<!--                <div class="oe_chatter">-->
-<!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
-<!--                    <field name="activity_ids" widget="mail_activity"/>-->
-<!--                    <field name="message_ids" widget="mail_thread"/>-->
-<!--                </div>-->
+                <!--                <div class="oe_chatter">-->
+                <!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+                <!--                    <field name="activity_ids" widget="mail_activity"/>-->
+                <!--                    <field name="message_ids" widget="mail_thread"/>-->
+                <!--                </div>-->
             </form>
+        </field>
+    </record>
+
+    <record id="view_supplier_audit_form_scores" model="ir.ui.view">
+        <field name="name">supplier.audit.form.scores</field>
+        <field name="model">supplier.audit</field>
+        <field name="inherit_id" ref="supplier_audit.view_supplier_audit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Category Scores">
+                    <group>
+                        <group>
+                            <!--                        <label string="Category 1:"  class="o_form_label"/>-->
+                            <field name="category_1_name" readonly="1"/>
+                        </group>
+                        <div class="row">
+                            <div>
+                                <field name="category_1_total_questions" widget="statinfo" string=" = Questions"/>
+                            </div>
+                            <div>
+                                <field name="category_1_total_score" widget="statinfo" string=" = Total Score"/>
+                            </div>
+                            <div>
+                                <field name="category_1_max_score" widget="statinfo" string=" = Max Score"/>
+                            </div>
+                            <div>
+                                <field name="category_1_percentage" widget="progressbar"/>
+                            </div>
+                        </div>
+
+                        <!-- Repeat for Category 2 to 10 -->
+                        <group>
+                            <!--                        <label string="Category 2:"  class="o_form_label"/>-->
+                            <field name="category_2_name" readonly="1"/>
+                        </group>
+                        <div class="row">
+                            <div>
+                                <field name="category_2_total_questions" widget="statinfo" string=" = Questions"/>
+                            </div>
+                            <div>
+                                <field name="category_2_total_score" widget="statinfo" string=" = Total Score"/>
+                            </div>
+                            <div>
+                                <field name="category_2_max_score" widget="statinfo" string=" = Max Score"/>
+                            </div>
+                            <div>
+                                <field name="category_2_percentage" widget="progressbar"/>
+                            </div>
+                        </div>
+                    </group>
+                    <!-- Continue for category_3 to category_10 in the same pattern -->
+                </page>
+            </xpath>
         </field>
     </record>
 
