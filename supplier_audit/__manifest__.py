@@ -12,9 +12,9 @@
         * Track corrective actions
         * Generate audit reports
     """,
-    'author': 'ASD Support System Pvt. Ltd.',
+    'author': 'ASD',
     'website': 'https://www.asdsoftwares.com',
-    'depends': ['base', 'purchase', 'contacts', 'mail'],
+    'depends': ['base', 'purchase', 'contacts', 'mail','web'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
@@ -27,6 +27,13 @@
         'report/supplier_audit_report.xml',
         'report/supplier_audit_report_template.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js',
+            'supplier_audit/static/src/js/radar_chart_widget.js',
+            'supplier_audit/static/src/xml/radar_chart_templates.xml',
+        ],
+    },
     'installable': True,
     'application': True,
     'auto_install': False,

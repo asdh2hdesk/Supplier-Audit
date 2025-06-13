@@ -54,7 +54,7 @@ class AuditChecklistQuestion(models.Model):
         ('1', '1'),
         ('2', '2'),
         ('3', '3'),
-    ], string='Status', default='0', help="Score or status of the question based on evaluation")
+    ], string='Score', default='3', help="Score or status of the question based on evaluation")
     observation = fields.Text('Observation', help="Observations noted during the audit")
     action = fields.Text('Action', help="Actions to be taken based on the audit findings")
 

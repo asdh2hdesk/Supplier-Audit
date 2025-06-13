@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="RadarChartWidget" owl="1">
+        <div class="o_radar_chart_widget">
+            <div class="o_radar_chart_container" style="height: 400px; width: 500px;">
+                <canvas t-ref="chart" style="height: 100%; width: 100%;"></canvas>
+            </div>
+        </div>
+    </t>
+</templates>

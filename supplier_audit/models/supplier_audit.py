@@ -1,7 +1,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 from datetime import timedelta
+from markupsafe import Markup
 import logging
+import json
 
 _logger = logging.getLogger(__name__)
 
@@ -26,6 +28,30 @@ class SupplierAudit(models.Model):
         ('done', 'Completed'),
         ('cancelled', 'Cancelled')
     ], string='Status', default='draft', tracking=True)
+
+    radar_chart_placeholder = fields.Char(compute='_compute_dummy', store=False)
+
+    @api.model
+    def _compute_dummy(self):
+        for rec in self:
+            rec.radar_chart_placeholder = 'chart'
+
+    management_score = fields.Float(string="Management Score", default=0.0)
+    manufacturing_score = fields.Float(string="Manufacturing Score", default=0.0)
+    production_readiness_score = fields.Float(string="Production Readiness Score", default=0.0)
+    quality_assurance_score = fields.Float(string="Quality Assurance Score", default=0.0)
+
+    @api.model
+    def get_audit_scores(self):
+        # Assuming we're displaying the chart for the current record
+        # In a real scenario, you might need to filter or aggregate data
+        audit = self
+        return {
+            'management': audit.management_score,
+            'manufacturing': audit.manufacturing_score,
+            'production_readiness': audit.production_readiness_score,
+            'quality_assurance': audit.quality_assurance_score
+        }
 
     auditor_id = fields.Many2one('res.users', string='Lead Auditor',
                                  required=True, default=lambda self: self.env.user, tracking=True)
@@ -370,7 +396,7 @@ class SupplierAudit(models.Model):
         for record in self:
             record.total_questions = len(record.question_line_ids)
             record.completed_questions = len(record.question_line_ids.filtered(
-                lambda x: x.state == 'answered'))
+                lambda x: x.state in ['answered','na']))
             record.completion_rate = (
                     record.completed_questions / record.total_questions * 100) if record.total_questions else 0
 
@@ -411,22 +437,36 @@ class SupplierAudit(models.Model):
 
         # Create question lines based on the selected checklist
         if audit.checklist_id:
-            # Get unique categories from checklist questions
-            categories = audit.checklist_id.question_ids.mapped('category_id').filtered(lambda x: x)
-            categories = list(set(categories))[:10]  # Get up to 10 unique categories
+            # Define the desired category order
+            desired_categories = ['Management', 'Manufacturing','Production Readiness', 'Quality Assurance & Process',]
+            category_records = self.env['audit.question.category'].search([
+                ('name', 'in', desired_categories)
+            ])
 
-            # Set the category fields
-            for i, cat in enumerate(categories):
-                setattr(audit, f'category_{i + 1}_id', cat)
+            # Map category names to their records
+            category_map = {cat.name: cat for cat in category_records}
+
+            # Assign categories in the desired order
+            for i, cat_name in enumerate(desired_categories, 1):
+                if cat_name in category_map:
+                    setattr(audit, f'category_{i}_id', category_map[cat_name])
+                else:
+                    # Log a warning if the category doesn't exist
+                    _logger.warning(f"Category '{cat_name}' not found in the system.")
 
             # Create question lines
             for question in audit.checklist_id.question_ids:
+                # Find the first matching category for the question
+                question_category = question.category_id
+                if question_category not in category_records:
+                    # Assign to the first available category if the question's category isn't in the desired list
+                    question_category = category_records[0] if category_records else False
+
                 self.env['supplier.audit.question.line'].create({
                     'audit_id': audit.id,
                     'question_id': question.id,
                     'name': question.name,
-                    'category_id': question.category_id.id if question.category_id else categories[
-                        0].id if categories else False,
+                    'category_id': question_category.id if question_category else False,
                     'evidence': question.evidence,
                     'scoring_criteria': question.scoring_criteria,
                     'observation': question.observation,
@@ -434,6 +474,47 @@ class SupplierAudit(models.Model):
                 })
 
         return audit
+
+    @api.onchange('checklist_id')
+    def _onchange_checklist_id(self):
+        for rec in self:
+            if rec.checklist_id:
+                # Clear previous question lines
+                rec.question_line_ids = [(5, 0, 0)]
+
+                # Define the desired category order
+                desired_categories = ['Management', 'Manufacturing','Production Readiness', 'Quality Assurance & Process']
+                category_records = self.env['audit.question.category'].search([
+                    ('name', 'in', desired_categories)
+                ])
+
+                # Map category names to their records
+                category_map = {cat.name: cat for cat in category_records}
+
+                # Assign categories in the desired order
+                for i, cat_name in enumerate(desired_categories, 1):
+                    if cat_name in category_map:
+                        setattr(rec, f'category_{i}_id', category_map[cat_name])
+                    else:
+                        setattr(rec, f'category_{i}_id', False)
+
+                # Re-create question lines
+                new_lines = []
+                for question in rec.checklist_id.question_ids:
+                    question_category = question.category_id
+                    if question_category not in category_records:
+                        question_category = category_records[0] if category_records else False
+
+                    new_lines.append((0, 0, {
+                        'question_id': question.id,
+                        'name': question.name,
+                        'category_id': question_category.id if question_category else False,
+                        'evidence': question.evidence,
+                        'scoring_criteria': question.scoring_criteria,
+                        'observation': question.observation,
+                        'action': question.action,
+                    }))
+                rec.question_line_ids = new_lines
 
     def action_plan(self):
         self.write({'state': 'planned'})
@@ -490,6 +571,157 @@ class SupplierAudit(models.Model):
             'target': 'new',
         }
 
+    #### Radar Graph
+    radar_chart_data = fields.Text(
+        'Radar Chart Data',
+        compute='_compute_radar_chart_data',
+        store=False
+    )
+
+    @api.depends('category_1_percentage', 'category_2_percentage', 'category_3_percentage', 'category_4_percentage',
+                 'category_5_percentage', 'category_6_percentage', 'category_7_percentage', 'category_8_percentage',
+                 'category_9_percentage', 'category_10_percentage',
+                 'category_1_name', 'category_2_name', 'category_3_name', 'category_4_name', 'category_5_name',
+                 'category_6_name', 'category_7_name', 'category_8_name', 'category_9_name', 'category_10_name')
+    def _compute_radar_chart_data(self):
+        for rec in self:
+            try:
+                # Get category data using the existing method
+                categories = rec.get_category_data()
+
+                # Prepare labels and data for the chart
+                labels = []
+                audit_data = []
+
+                for cat in categories:
+                    if cat['name'] and cat['name'].strip():  # Only include categories with names
+                        labels.append(cat['name'])
+                        audit_data.append(round(cat['percentage'], 1))  # Round to 1 decimal place
+
+                # If no categories, provide default
+                if not labels:
+                    labels = ['No Categories Configured']
+                    audit_data = [0]
+
+                # Define benchmark data
+                good_data = [100] * len(labels)
+                standard_data = [80] * len(labels)
+                poor_data = [67] * len(labels)
+
+                # Construct the Chart.js radar chart configuration
+                chart_config = {
+                    "type": "radar",
+                    "data": {
+                        "labels": labels,
+                        "datasets": [
+                            {
+                                "label": "Audit Results",
+                                "data": audit_data,
+                                "backgroundColor": "rgba(54, 162, 235, 0.2)",
+                                "borderColor": "#36A2EB",
+                                "borderWidth": 2,
+                                "pointBackgroundColor": "#36A2EB",
+                                "pointBorderColor": "#36A2EB",
+                                "pointBorderWidth": 2,
+                                "pointRadius": 5,
+                                "fill": True
+                            },
+                            {
+                                "label": "Good (100%)",
+                                "data": good_data,
+                                "backgroundColor": "rgba(75, 192, 192, 0.1)",
+                                "borderColor": "#4BC0C0",
+                                "borderWidth": 1,
+                                "pointBackgroundColor": "#4BC0C0",
+                                "pointRadius": 3,
+                                "fill": False
+                            },
+                            {
+                                "label": "Standard (80%)",
+                                "data": standard_data,
+                                "backgroundColor": "rgba(255, 206, 86, 0.1)",
+                                "borderColor": "#FFCE56",
+                                "borderWidth": 1,
+                                "pointBackgroundColor": "#FFCE56",
+                                "pointRadius": 3,
+                                "fill": False
+                            },
+                            {
+                                "label": "Poor (67%)",
+                                "data": poor_data,
+                                "backgroundColor": "rgba(255, 99, 132, 0.1)",
+                                "borderColor": "#FF6384",
+                                "borderWidth": 1,
+                                "pointBackgroundColor": "#FF6384",
+                                "pointRadius": 3,
+                                "fill": False
+                            }
+                        ]
+                    },
+                    "options": {
+                        "responsive": True,
+                        "maintainAspectRatio": False,
+                        "scales": {
+                            "r": {
+                                "angleLines": {
+                                    "display": True,
+                                    "color": "rgba(0, 0, 0, 0.1)"
+                                },
+                                "grid": {
+                                    "color": "rgba(0, 0, 0, 0.1)"
+                                },
+                                "suggestedMin": 0,
+                                "suggestedMax": 100,
+                                "ticks": {
+                                    "stepSize": 25,
+                                    "callback": "function(value) { return value + '%'; }"
+                                }
+                            }
+                        },
+                        "plugins": {
+                            "legend": {
+                                "position": "top",
+                                "labels": {
+                                    "usePointStyle": True,
+                                    "padding": 20
+                                }
+                            },
+                            "tooltip": {
+                                "callbacks": {
+                                    "label": "function(context) { return context.dataset.label + ': ' + context.parsed.r + '%'; }"
+                                }
+                            }
+                        },
+                        "interaction": {
+                            "intersect": False
+                        }
+                    }
+                }
+
+                # Store the chart configuration as a JSON string
+                rec.radar_chart_data = json.dumps(chart_config)
+
+            except Exception as e:
+                _logger.error(f"Error computing radar chart data for audit {rec.id}: {e}")
+                # Set empty chart data on error
+                rec.radar_chart_data = json.dumps({
+                    "type": "radar",
+                    "data": {
+                        "labels": ["Error Loading Data"],
+                        "datasets": [{
+                            "label": "Error",
+                            "data": [0],
+                            "backgroundColor": "rgba(255, 99, 132, 0.2)",
+                            "borderColor": "#FF6384",
+                            "borderWidth": 2
+                        }]
+                    },
+                    "options": {
+                        "responsive": True,
+                        "maintainAspectRatio": False
+                    }
+                })
+
 
 class SupplierAuditQuestionLine(models.Model):
     _name = 'supplier.audit.question.line'
@@ -513,7 +745,7 @@ class SupplierAuditQuestionLine(models.Model):
         ('1', '1'),
         ('2', '2'),
         ('3', '3'),
-    ], string='Status', default='0', help="Score or status of the question based on evaluation")
+    ], string='Score', help="Score or status of the question based on evaluation")
     observation = fields.Text('Observation', help="Observations noted during the audit")
     action = fields.Text('Action', help="Actions to be taken based on the audit findings")
     state = fields.Selection([

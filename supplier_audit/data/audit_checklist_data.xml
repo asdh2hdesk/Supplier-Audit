@@ -46,29 +46,29 @@
 <!--            <field name="weight">1.0</field>-->
 <!--            <field name="guidance">Request a detailed explanation or documentation of the process.</field>-->
 <!--        </record>-->
-<!--        <record id="sequence_supplier_audit" model="ir.sequence">-->
-<!--            <field name="name">Supplier Audit Sequence</field>-->
-<!--            <field name="code">supplier.audit</field>-->
-<!--            <field name="prefix">SA/</field>-->
-<!--            <field name="padding">5</field>-->
-<!--            <field name="number_next">1</field>-->
-<!--            <field name="number_increment">1</field>-->
-<!--        </record>-->
-<!--        <record id="sequence_audit_finding" model="ir.sequence">-->
-<!--            <field name="name">Audit Finding Sequence</field>-->
-<!--            <field name="code">audit.finding</field>-->
-<!--            <field name="prefix">FIND/</field>-->
-<!--            <field name="padding">5</field>-->
-<!--            <field name="number_next">1</field>-->
-<!--            <field name="number_increment">1</field>-->
-<!--        </record>-->
-<!--        <record id="sequence_corrective_action" model="ir.sequence">-->
-<!--            <field name="name">Corrective Action Sequence</field>-->
-<!--            <field name="code">corrective.action</field>-->
-<!--            <field name="prefix">CA/</field>-->
-<!--            <field name="padding">5</field>-->
-<!--            <field name="number_next">1</field>-->
-<!--            <field name="number_increment">1</field>-->
-<!--        </record>-->
+        <record id="sequence_supplier_audit" model="ir.sequence">
+            <field name="name">Supplier Audit Sequence</field>
+            <field name="code">supplier.audit</field>
+            <field name="prefix">SA/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="sequence_audit_finding" model="ir.sequence">
+            <field name="name">Audit Finding Sequence</field>
+            <field name="code">audit.finding</field>
+            <field name="prefix">FIND/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="sequence_corrective_action" model="ir.sequence">
+            <field name="name">Corrective Action Sequence</field>
+            <field name="code">corrective.action</field>
+            <field name="prefix">CA/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
     </data>
 </odoo>
