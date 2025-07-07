@@ -100,61 +100,61 @@
     </record>
 
     <!-- Audit Question Categories Form View -->
-    <record id="view_question_category_form" model="ir.ui.view">
-        <field name="name">audit.question.category.form</field>
-        <field name="model">audit.question.category</field>
-        <field name="arch" type="xml">
-            <form string="Question Category">
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="name" placeholder="e.g. Quality Control"/>
-                            <field name="sequence"/>
-                            <field name="color" widget="color_picker"/>
-                        </group>
-                        <group>
-                            <field name="question_count" readonly="1"/>
-                        </group>
-                    </group>
-                    <separator string="Description"/>
-                        <field name="description" placeholder="Describe the purpose of this category..."/>
+<!--    <record id="view_question_category_form" model="ir.ui.view">-->
+<!--        <field name="name">audit.question.category.form</field>-->
+<!--        <field name="model">audit.question.category</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Question Category">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="name" placeholder="e.g. Quality Control"/>-->
+<!--                            <field name="sequence"/>-->
+<!--                            <field name="color" widget="color_picker"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="question_count" readonly="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <separator string="Description"/>-->
+<!--                        <field name="description" placeholder="Describe the purpose of this category..."/>-->
 
-                    <notebook>
-                        <page string="Questions">
-                            <field name="question_ids" readonly="1">
-                                <tree string="Questions">
-                                    <field name="sequence"/>
-                                    <field name="name"/>
-                                    <field name="evidence"/>
-                                    <field name="scoring_criteria"/>
-                                    <field name="status"/>
-                                    <field name="observation"/>
-                                    <field name="action"/>
-<!--                                    <field name="question_type"/>-->
-<!--                                    <field name="reference"/>-->
-<!--                                    <field name="weight"/>-->
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
+<!--                    <notebook>-->
+<!--                        <page string="Questions">-->
+<!--                            <field name="question_ids" readonly="1">-->
+<!--                                <tree string="Questions">-->
+<!--                                    <field name="sequence"/>-->
+<!--                                    <field name="name"/>-->
+<!--                                    <field name="evidence"/>-->
+<!--                                    <field name="scoring_criteria"/>-->
+<!--                                    <field name="status"/>-->
+<!--                                    <field name="observation"/>-->
+<!--                                    <field name="action"/>-->
+<!--&lt;!&ndash;                                    <field name="question_type"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="reference"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="weight"/>&ndash;&gt;-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!-- Audit Question Categories Tree View -->
-    <record id="view_question_category_tree" model="ir.ui.view">
-        <field name="name">audit.question.category.tree</field>
-        <field name="model">audit.question.category</field>
-        <field name="arch" type="xml">
-            <tree string="Question Categories">
-                <field name="name"/>
-                <field name="sequence" widget="handle"/>
-                <field name="question_count"/>
-                <field name="color" widget="color"/>
-            </tree>
-        </field>
-    </record>
+<!--    <record id="view_question_category_tree" model="ir.ui.view">-->
+<!--        <field name="name">audit.question.category.tree</field>-->
+<!--        <field name="model">audit.question.category</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree string="Question Categories">-->
+<!--                <field name="name"/>-->
+<!--                <field name="sequence" widget="handle"/>-->
+<!--                <field name="question_count"/>-->
+<!--                <field name="color" widget="color"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!-- Audit Checklist Search View -->
     <record id="view_audit_checklist_search" model="ir.ui.view">

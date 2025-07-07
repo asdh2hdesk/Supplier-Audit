@@ -1,0 +1,10 @@
+.o_progressbar .o_progress > div {
+    background-color: #039BE5;
+}
+.o_progressbar .o_progress {
+    width: 50vh;
+    height: 18px;
+    border: 1px solid #dee2e6;
+    border-radius:6px;
+    background-color: white;
+}

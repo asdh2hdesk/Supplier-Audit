@@ -11,5 +11,5 @@ access_supplier_audit_question_line_user,supplier.audit.question.line.user,model
 access_supplier_audit_question_line_manager,supplier.audit.question.line.manager,model_supplier_audit_question_line,group_supplier_audit_manager,1,1,1,1
 access_audit_finding_user,audit.finding.user,model_audit_finding,group_supplier_audit_user,1,1,1,1
 access_audit_finding_manager,audit.finding.manager,model_audit_finding,group_supplier_audit_manager,1,1,1,1
-access_corrective_action_user,corrective.action.user,model_corrective_action,group_supplier_audit_user,1,1,1,1
-access_corrective_action_manager,corrective.action.manager,model_corrective_action,group_supplier_audit_manager,1,1,1,1
+access_sa_corrective_action_user,sa.corrective.action.user,model_sa_corrective_action,group_supplier_audit_user,1,1,1,1
+access_sa_corrective_action_manager,sa.corrective.action.manager,model_sa_corrective_action,group_supplier_audit_manager,1,1,1,1

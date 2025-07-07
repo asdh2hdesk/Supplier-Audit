@@ -2,8 +2,8 @@
 <odoo>
     <!-- Corrective Action Tree View -->
     <record id="view_corrective_action_tree" model="ir.ui.view">
-        <field name="name">corrective.action.tree</field>
-        <field name="model">corrective.action</field>
+        <field name="name">sa.corrective.action.tree</field>
+        <field name="model">sa.corrective.action</field>
         <field name="arch" type="xml">
             <tree string="Corrective Actions">
                 <field name="name"/>
@@ -20,8 +20,8 @@
 
     <!-- Corrective Action Form View -->
     <record id="view_corrective_action_form" model="ir.ui.view">
-        <field name="name">corrective.action.form</field>
-        <field name="model">corrective.action</field>
+        <field name="name">sa.corrective.action.form</field>
+        <field name="model">sa.corrective.action</field>
         <field name="arch" type="xml">
             <form string="Corrective Action">
                 <header>
@@ -87,8 +87,8 @@
 
     <!-- Corrective Action Search View -->
     <record id="view_corrective_action_search" model="ir.ui.view">
-        <field name="name">corrective.action.search</field>
-        <field name="model">corrective.action</field>
+        <field name="name">sa.corrective.action.search</field>
+        <field name="model">sa.corrective.action</field>
         <field name="arch" type="xml">
             <search string="Search Corrective Actions">
                 <field name="name"/>
@@ -111,7 +111,7 @@
     <!-- Corrective Action Action -->
     <record id="action_corrective_actions" model="ir.actions.act_window">
         <field name="name">Corrective Actions</field>
-        <field name="res_model">corrective.action</field>
+        <field name="res_model">sa.corrective.action</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

@@ -3,7 +3,7 @@ from datetime import timedelta
 
 
 class CorrectiveAction(models.Model):
-    _name = 'corrective.action'
+    _name = 'sa.corrective.action'
     _description = 'Corrective Action'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'due_date, id'
@@ -66,7 +66,7 @@ class CorrectiveAction(models.Model):
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
-            vals['name'] = self.env['ir.sequence'].next_by_code('corrective.action') or _('New')
+            vals['name'] = self.env['ir.sequence'].next_by_code('sa.corrective.action') or _('New')
         return super(CorrectiveAction, self).create(vals)
 
     def action_set_planned(self):

@@ -17,7 +17,7 @@
                   sequence="20"/>
         <menuitem id="menu_audit_checklists" action="action_audit_checklists" parent="menu_supplier_audit_configuration"
                   sequence="10"/>
-        <menuitem id="menu_question_categories" action="action_question_categories"
-                  parent="menu_supplier_audit_configuration" sequence="20"/>
+<!--        <menuitem id="menu_question_categories" action="action_question_categories"-->
+<!--                  parent="menu_supplier_audit_configuration" sequence="20"/>-->
 <!--    </data>-->
 </odoo>

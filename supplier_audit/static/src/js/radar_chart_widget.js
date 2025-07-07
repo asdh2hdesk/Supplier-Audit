@@ -39,17 +39,43 @@ export class RadarChartWidget extends Component {
             this.chart.destroy();
         }
 
-        // Create new chart
-        this.chart = new Chart(ctx, {
-            type: 'radar',
-            data: chartData.data,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                ...chartData.options
+        // Add native JS callback functions (replacing invalid JSON strings)
+        const optionsWithCallbacks = {
+            ...chartData.options,
+            scales: {
+                ...(chartData.options?.scales || {}),
+                r: {
+                    ...(chartData.options?.scales?.r || {}),
+                    ticks: {
+                        ...chartData.options?.scales?.r?.ticks,
+                        callback: function (value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                ...(chartData.options?.plugins || {}),
+                tooltip: {
+                    ...chartData.options?.plugins?.tooltip,
+                    callbacks: {
+                        ...chartData.options?.plugins?.tooltip?.callbacks,
+                        label: function (context) {
+                            return context.dataset.label + ': ' + context.parsed.r + '%';
+                        }
+                    }
+                }
             }
-        });
-    }
+        };
+
+    // Create new chart
+    this.chart = new Chart(ctx, {
+        type: 'radar',
+        data: chartData.data,
+        options: optionsWithCallbacks
+    });
+}
+
 
     getDefaultChartData() {
         return {

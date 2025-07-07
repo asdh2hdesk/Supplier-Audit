@@ -33,7 +33,7 @@ class AuditFinding(models.Model):
     evidence = fields.Text('Evidence', tracking=True)
     root_cause = fields.Text('Root Cause Analysis', tracking=True)
 
-    corrective_action_ids = fields.One2many('corrective.action', 'finding_id',
+    corrective_action_ids = fields.One2many('sa.corrective.action', 'finding_id',
                                             string='Corrective Actions')
     action_count = fields.Integer('Action Count', compute='_compute_action_count', store=True)
 
@@ -76,7 +76,7 @@ class AuditFinding(models.Model):
         return {
             'name': _('New Corrective Action'),
             'type': 'ir.actions.act_window',
-            'res_model': 'corrective.action',
+            'res_model': 'sa.corrective.action',
             'view_mode': 'form',
             'context': {
                 'default_finding_id': self.id,

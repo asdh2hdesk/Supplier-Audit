@@ -61,7 +61,7 @@ class SupplierAudit(models.Model):
     checklist_id = fields.Many2one('audit.checklist', string='Audit Checklist',
                                    required=True, tracking=True)
     finding_ids = fields.One2many('audit.finding', 'audit_id', string='Audit Findings')
-    corrective_action_ids = fields.One2many('corrective.action', 'audit_id',
+    corrective_action_ids = fields.One2many('sa.corrective.action', 'audit_id',
                                             string='Corrective Actions')
 
     total_questions = fields.Integer('Total Questions', compute='_compute_progress_stats', store=True)
@@ -179,53 +179,53 @@ class SupplierAudit(models.Model):
                                           default=0)
     category_4_percentage = fields.Float('Category 4 %', compute='_compute_category_scores', store=True, default=0.0)
 
-    category_5_total_questions = fields.Integer('Category 5 Questions', compute='_compute_category_scores', store=True,
-                                                default=0)
-    category_5_total_score = fields.Integer('Category 5 Score', compute='_compute_category_scores', store=True,
-                                            default=0)
-    category_5_max_score = fields.Integer('Category 5 Max Score', compute='_compute_category_scores', store=True,
-                                          default=0)
-    category_5_percentage = fields.Float('Category 5 %', compute='_compute_category_scores', store=True, default=0.0)
-
-    category_6_total_questions = fields.Integer('Category 6 Questions', compute='_compute_category_scores', store=True,
-                                                default=0)
-    category_6_total_score = fields.Integer('Category 6 Score', compute='_compute_category_scores', store=True,
-                                            default=0)
-    category_6_max_score = fields.Integer('Category 6 Max Score', compute='_compute_category_scores', store=True,
-                                          default=0)
-    category_6_percentage = fields.Float('Category 6 %', compute='_compute_category_scores', store=True, default=0.0)
-
-    category_7_total_questions = fields.Integer('Category 7 Questions', compute='_compute_category_scores', store=True,
-                                                default=0)
-    category_7_total_score = fields.Integer('Category 7 Score', compute='_compute_category_scores', store=True,
-                                            default=0)
-    category_7_max_score = fields.Integer('Category 7 Max Score', compute='_compute_category_scores', store=True,
-                                          default=0)
-    category_7_percentage = fields.Float('Category 7 %', compute='_compute_category_scores', store=True, default=0.0)
-
-    category_8_total_questions = fields.Integer('Category 8 Questions', compute='_compute_category_scores', store=True,
-                                                default=0)
-    category_8_total_score = fields.Integer('Category 8 Score', compute='_compute_category_scores', store=True,
-                                            default=0)
-    category_8_max_score = fields.Integer('Category 8 Max Score', compute='_compute_category_scores', store=True,
-                                          default=0)
-    category_8_percentage = fields.Float('Category 8 %', compute='_compute_category_scores', store=True, default=0.0)
-
-    category_9_total_questions = fields.Integer('Category 9 Questions', compute='_compute_category_scores', store=True,
-                                                default=0)
-    category_9_total_score = fields.Integer('Category 9 Score', compute='_compute_category_scores', store=True,
-                                            default=0)
-    category_9_max_score = fields.Integer('Category 9 Max Score', compute='_compute_category_scores', store=True,
-                                          default=0)
-    category_9_percentage = fields.Float('Category 9 %', compute='_compute_category_scores', store=True, default=0.0)
-
-    category_10_total_questions = fields.Integer('Category 10 Questions', compute='_compute_category_scores',
-                                                 store=True, default=0)
-    category_10_total_score = fields.Integer('Category 10 Score', compute='_compute_category_scores', store=True,
-                                             default=0)
-    category_10_max_score = fields.Integer('Category 10 Max Score', compute='_compute_category_scores', store=True,
-                                           default=0)
-    category_10_percentage = fields.Float('Category 10 %', compute='_compute_category_scores', store=True, default=0.0)
+    # category_5_total_questions = fields.Integer('Category 5 Questions', compute='_compute_category_scores', store=True,
+    #                                             default=0)
+    # category_5_total_score = fields.Integer('Category 5 Score', compute='_compute_category_scores', store=True,
+    #                                         default=0)
+    # category_5_max_score = fields.Integer('Category 5 Max Score', compute='_compute_category_scores', store=True,
+    #                                       default=0)
+    # category_5_percentage = fields.Float('Category 5 %', compute='_compute_category_scores', store=True, default=0.0)
+    #
+    # category_6_total_questions = fields.Integer('Category 6 Questions', compute='_compute_category_scores', store=True,
+    #                                             default=0)
+    # category_6_total_score = fields.Integer('Category 6 Score', compute='_compute_category_scores', store=True,
+    #                                         default=0)
+    # category_6_max_score = fields.Integer('Category 6 Max Score', compute='_compute_category_scores', store=True,
+    #                                       default=0)
+    # category_6_percentage = fields.Float('Category 6 %', compute='_compute_category_scores', store=True, default=0.0)
+    #
+    # category_7_total_questions = fields.Integer('Category 7 Questions', compute='_compute_category_scores', store=True,
+    #                                             default=0)
+    # category_7_total_score = fields.Integer('Category 7 Score', compute='_compute_category_scores', store=True,
+    #                                         default=0)
+    # category_7_max_score = fields.Integer('Category 7 Max Score', compute='_compute_category_scores', store=True,
+    #                                       default=0)
+    # category_7_percentage = fields.Float('Category 7 %', compute='_compute_category_scores', store=True, default=0.0)
+    #
+    # category_8_total_questions = fields.Integer('Category 8 Questions', compute='_compute_category_scores', store=True,
+    #                                             default=0)
+    # category_8_total_score = fields.Integer('Category 8 Score', compute='_compute_category_scores', store=True,
+    #                                         default=0)
+    # category_8_max_score = fields.Integer('Category 8 Max Score', compute='_compute_category_scores', store=True,
+    #                                       default=0)
+    # category_8_percentage = fields.Float('Category 8 %', compute='_compute_category_scores', store=True, default=0.0)
+    #
+    # category_9_total_questions = fields.Integer('Category 9 Questions', compute='_compute_category_scores', store=True,
+    #                                             default=0)
+    # category_9_total_score = fields.Integer('Category 9 Score', compute='_compute_category_scores', store=True,
+    #                                         default=0)
+    # category_9_max_score = fields.Integer('Category 9 Max Score', compute='_compute_category_scores', store=True,
+    #                                       default=0)
+    # category_9_percentage = fields.Float('Category 9 %', compute='_compute_category_scores', store=True, default=0.0)
+    #
+    # category_10_total_questions = fields.Integer('Category 10 Questions', compute='_compute_category_scores',
+    #                                              store=True, default=0)
+    # category_10_total_score = fields.Integer('Category 10 Score', compute='_compute_category_scores', store=True,
+    #                                          default=0)
+    # category_10_max_score = fields.Integer('Category 10 Max Score', compute='_compute_category_scores', store=True,
+    #                                        default=0)
+    # category_10_percentage = fields.Float('Category 10 %', compute='_compute_category_scores', store=True, default=0.0)
 
 
     @api.depends('question_line_ids.status', 'question_line_ids.category_id', 'question_line_ids.state')
@@ -438,7 +438,7 @@ class SupplierAudit(models.Model):
         # Create question lines based on the selected checklist
         if audit.checklist_id:
             # Define the desired category order
-            desired_categories = ['Management', 'Manufacturing','Production Readiness', 'Quality Assurance & Process',]
+            desired_categories = ['Management', 'Manufacturing','Production Readiness', 'Quality Assurance &  Process',]
             category_records = self.env['audit.question.category'].search([
                 ('name', 'in', desired_categories)
             ])
@@ -562,7 +562,7 @@ class SupplierAudit(models.Model):
         return {
             'name': _('New Corrective Action'),
             'type': 'ir.actions.act_window',
-            'res_model': 'corrective.action',
+            'res_model': 'sa.corrective.action',
             'view_mode': 'form',
             'context': {
                 'default_audit_id': self.id,
@@ -579,10 +579,10 @@ class SupplierAudit(models.Model):
     )
 
     @api.depends('category_1_percentage', 'category_2_percentage', 'category_3_percentage', 'category_4_percentage',
-                 'category_5_percentage', 'category_6_percentage', 'category_7_percentage', 'category_8_percentage',
-                 'category_9_percentage', 'category_10_percentage',
-                 'category_1_name', 'category_2_name', 'category_3_name', 'category_4_name', 'category_5_name',
-                 'category_6_name', 'category_7_name', 'category_8_name', 'category_9_name', 'category_10_name')
+                 # 'category_5_percentage', 'category_6_percentage', 'category_7_percentage', 'category_8_percentage', 'category_9_percentage', 'category_10_percentage',
+                 'category_1_name', 'category_2_name', 'category_3_name', 'category_4_name',
+                 # 'category_5_name','category_6_name', 'category_7_name', 'category_8_name', 'category_9_name', 'category_10_name'
+                 )
     def _compute_radar_chart_data(self):
         for rec in self:
             try:

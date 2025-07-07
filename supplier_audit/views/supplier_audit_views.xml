@@ -95,7 +95,7 @@
                         </group>
                     </group>
 
-                   <!-- Radar Chart Section -->
+                    <!-- Radar Chart Section -->
                     <group string="Audit Performance Overview">
                         <div class="o_radar_chart_section">
                             <field name="radar_chart_data" widget="radar_chart" nolabel="1"/>
@@ -107,23 +107,23 @@
                         <field name="category_2_id"/>
                         <field name="category_3_id"/>
                         <field name="category_4_id"/>
-                        <field name="category_5_id"/>
-                        <field name="category_6_id"/>
-                        <field name="category_7_id"/>
-                        <field name="category_8_id"/>
-                        <field name="category_9_id"/>
-                        <field name="category_10_id"/>
+                        <!--                        <field name="category_5_id"/>-->
+                        <!--                        <field name="category_6_id"/>-->
+                        <!--                        <field name="category_7_id"/>-->
+                        <!--                        <field name="category_8_id"/>-->
+                        <!--                        <field name="category_9_id"/>-->
+                        <!--                        <field name="category_10_id"/>-->
                         <!-- Add category name fields -->
                         <field name="category_1_name"/>
                         <field name="category_2_name"/>
                         <field name="category_3_name"/>
                         <field name="category_4_name"/>
-                        <field name="category_5_name"/>
-                        <field name="category_6_name"/>
-                        <field name="category_7_name"/>
-                        <field name="category_8_name"/>
-                        <field name="category_9_name"/>
-                        <field name="category_10_name"/>
+                        <!--                        <field name="category_5_name"/>-->
+                        <!--                        <field name="category_6_name"/>-->
+                        <!--                        <field name="category_7_name"/>-->
+                        <!--                        <field name="category_8_name"/>-->
+                        <!--                        <field name="category_9_name"/>-->
+                        <!--                        <field name="category_10_name"/>-->
                     </group>
                     <notebook>
                         <page string="Audit Questions">
@@ -137,10 +137,14 @@
                                     <field name="compliance_score" readonly="1" widget="percentage"/>
                                 </group>
                                 <group>
-                                    <field name="category_1_percentage" widget="progressbar"/>
-                                    <field name="category_2_percentage" widget="progressbar"/>
-                                    <field name="category_3_percentage" widget="progressbar"/>
-                                    <field name="category_4_percentage" widget="progressbar"/>
+                                    <field name="category_1_percentage" widget="progressbar" string="Management"/>
+                                    <field name="category_3_percentage" widget="progressbar"
+                                           string="Production Readiness"/>
+                                </group>
+                                <group>
+                                    <field name="category_2_percentage" widget="progressbar" string="Manufacturing"/>
+                                    <field name="category_4_percentage" widget="progressbar"
+                                           string="Quality Assurance &amp; Process Control"/>
                                 </group>
                             </group>
 
@@ -273,90 +277,90 @@
                                         </tree>
                                     </field>
                                 </page>
-                                <page string="category_5_name" attrs="{'invisible': [('category_5_id','=',False)]}">
-                                    <field name="category_5_question_ids"
-                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
-                                            <field name="name"/>
-                                            <field name="state"/>
-                                            <field name="evidence"/>
-                                            <field name="scoring_criteria"/>
-                                            <field name="status"/>
-                                            <field name="observation"/>
-                                            <field name="action"/>
-                                        </tree>
-                                    </field>
-                                </page>
-                                <page string="category_6_name" attrs="{'invisible': [('category_6_id','=',False)]}">
-                                    <field name="category_6_question_ids"
-                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
-                                            <field name="name"/>
-                                            <field name="state"/>
-                                            <field name="evidence"/>
-                                            <field name="scoring_criteria"/>
-                                            <field name="status"/>
-                                            <field name="observation"/>
-                                            <field name="action"/>
-                                        </tree>
-                                    </field>
-                                </page>
-                                <page string="category_7_name" attrs="{'invisible': [('category_7_id','=',False)]}">
-                                    <field name="category_7_question_ids"
-                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
-                                            <field name="name"/>
-                                            <field name="state"/>
-                                            <field name="evidence"/>
-                                            <field name="scoring_criteria"/>
-                                            <field name="status"/>
-                                            <field name="observation"/>
-                                            <field name="action"/>
-                                        </tree>
-                                    </field>
-                                </page>
-                                <page string="category_8_name" attrs="{'invisible': [('category_8_id','=',False)]}">
-                                    <field name="category_8_question_ids"
-                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
-                                            <field name="name"/>
-                                            <field name="state"/>
-                                            <field name="evidence"/>
-                                            <field name="scoring_criteria"/>
-                                            <field name="status"/>
-                                            <field name="observation"/>
-                                            <field name="action"/>
-                                        </tree>
-                                    </field>
-                                </page>
-                                <page string="category_9_name" attrs="{'invisible': [('category_9_id','=',False)]}">
-                                    <field name="category_9_question_ids"
-                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
-                                            <field name="name"/>
-                                            <field name="state"/>
-                                            <field name="evidence"/>
-                                            <field name="scoring_criteria"/>
-                                            <field name="status"/>
-                                            <field name="observation"/>
-                                            <field name="action"/>
-                                        </tree>
-                                    </field>
-                                </page>
-                                <page string="category_10_name" attrs="{'invisible': [('category_10_id','=',False)]}">
-                                    <field name="category_10_question_ids"
-                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
-                                            <field name="name"/>
-                                            <field name="state"/>
-                                            <field name="evidence"/>
-                                            <field name="scoring_criteria"/>
-                                            <field name="status"/>
-                                            <field name="observation"/>
-                                            <field name="action"/>
-                                        </tree>
-                                    </field>
-                                </page>
+                                <!--                                <page string="category_5_name" attrs="{'invisible': [('category_5_id','=',False)]}">-->
+                                <!--                                    <field name="category_5_question_ids"-->
+                                <!--                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">-->
+                                <!--                                        <tree editable="bottom">-->
+                                <!--                                            <field name="name"/>-->
+                                <!--                                            <field name="state"/>-->
+                                <!--                                            <field name="evidence"/>-->
+                                <!--                                            <field name="scoring_criteria"/>-->
+                                <!--                                            <field name="status"/>-->
+                                <!--                                            <field name="observation"/>-->
+                                <!--                                            <field name="action"/>-->
+                                <!--                                        </tree>-->
+                                <!--                                    </field>-->
+                                <!--                                </page>-->
+                                <!--                                <page string="category_6_name" attrs="{'invisible': [('category_6_id','=',False)]}">-->
+                                <!--                                    <field name="category_6_question_ids"-->
+                                <!--                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">-->
+                                <!--                                        <tree editable="bottom">-->
+                                <!--                                            <field name="name"/>-->
+                                <!--                                            <field name="state"/>-->
+                                <!--                                            <field name="evidence"/>-->
+                                <!--                                            <field name="scoring_criteria"/>-->
+                                <!--                                            <field name="status"/>-->
+                                <!--                                            <field name="observation"/>-->
+                                <!--                                            <field name="action"/>-->
+                                <!--                                        </tree>-->
+                                <!--                                    </field>-->
+                                <!--                                </page>-->
+                                <!--                                <page string="category_7_name" attrs="{'invisible': [('category_7_id','=',False)]}">-->
+                                <!--                                    <field name="category_7_question_ids"-->
+                                <!--                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">-->
+                                <!--                                        <tree editable="bottom">-->
+                                <!--                                            <field name="name"/>-->
+                                <!--                                            <field name="state"/>-->
+                                <!--                                            <field name="evidence"/>-->
+                                <!--                                            <field name="scoring_criteria"/>-->
+                                <!--                                            <field name="status"/>-->
+                                <!--                                            <field name="observation"/>-->
+                                <!--                                            <field name="action"/>-->
+                                <!--                                        </tree>-->
+                                <!--                                    </field>-->
+                                <!--                                </page>-->
+                                <!--                                <page string="category_8_name" attrs="{'invisible': [('category_8_id','=',False)]}">-->
+                                <!--                                    <field name="category_8_question_ids"-->
+                                <!--                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">-->
+                                <!--                                        <tree editable="bottom">-->
+                                <!--                                            <field name="name"/>-->
+                                <!--                                            <field name="state"/>-->
+                                <!--                                            <field name="evidence"/>-->
+                                <!--                                            <field name="scoring_criteria"/>-->
+                                <!--                                            <field name="status"/>-->
+                                <!--                                            <field name="observation"/>-->
+                                <!--                                            <field name="action"/>-->
+                                <!--                                        </tree>-->
+                                <!--                                    </field>-->
+                                <!--                                </page>-->
+                                <!--                                <page string="category_9_name" attrs="{'invisible': [('category_9_id','=',False)]}">-->
+                                <!--                                    <field name="category_9_question_ids"-->
+                                <!--                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">-->
+                                <!--                                        <tree editable="bottom">-->
+                                <!--                                            <field name="name"/>-->
+                                <!--                                            <field name="state"/>-->
+                                <!--                                            <field name="evidence"/>-->
+                                <!--                                            <field name="scoring_criteria"/>-->
+                                <!--                                            <field name="status"/>-->
+                                <!--                                            <field name="observation"/>-->
+                                <!--                                            <field name="action"/>-->
+                                <!--                                        </tree>-->
+                                <!--                                    </field>-->
+                                <!--                                </page>-->
+                                <!--                                <page string="category_10_name" attrs="{'invisible': [('category_10_id','=',False)]}">-->
+                                <!--                                    <field name="category_10_question_ids"-->
+                                <!--                                           attrs="{'readonly': [('state', '!=', 'in_progress')]}">-->
+                                <!--                                        <tree editable="bottom">-->
+                                <!--                                            <field name="name"/>-->
+                                <!--                                            <field name="state"/>-->
+                                <!--                                            <field name="evidence"/>-->
+                                <!--                                            <field name="scoring_criteria"/>-->
+                                <!--                                            <field name="status"/>-->
+                                <!--                                            <field name="observation"/>-->
+                                <!--                                            <field name="action"/>-->
+                                <!--                                        </tree>-->
+                                <!--                                    </field>-->
+                                <!--                                </page>-->
                             </notebook>
                         </page>
                         <page string="Findings">
