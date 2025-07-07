@@ -188,15 +188,19 @@
                                     <!-- Repeat for each category -->
                                     <field name="category_1_question_ids"
                                            attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
+                                        <tree editable="bottom" decoration-danger="status in ('0','1')"
+                                              decoration-warning="status == '2'"
+                                              decoration-success="status == '3'">
                                             <field name="category_id"/>
                                             <field name="name"/>
-                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
+                                            <field name="state"/>
+                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
+                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
@@ -213,15 +217,19 @@
                                     </group>
                                     <field name="category_2_question_ids"
                                            attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
+                                        <tree editable="bottom"  decoration-danger="status in ('0','1')"
+                                              decoration-warning="status == '2'"
+                                              decoration-success="status == '3'">
                                             <field name="category_id"/>
                                             <field name="name"/>
-                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
+                                            <field name="state"/>
+                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
+                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
@@ -239,15 +247,19 @@
                                     </group>
                                     <field name="category_3_question_ids"
                                            attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
+                                        <tree editable="bottom" decoration-danger="status in ('0','1')"
+                                              decoration-warning="status == '2'"
+                                              decoration-success="status == '3'">
                                             <field name="category_id"/>
                                             <field name="name"/>
-                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
+                                            <field name="state"/>
+                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
+                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
@@ -265,15 +277,19 @@
                                     </group>
                                     <field name="category_4_question_ids"
                                            attrs="{'readonly': [('state', '!=', 'in_progress')]}">
-                                        <tree editable="bottom">
+                                        <tree editable="bottom" decoration-danger="status in ('0','1')"
+                                              decoration-warning="status == '2'"
+                                              decoration-success="status == '3'">
                                             <field name="category_id"/>
                                             <field name="name"/>
-                                            <field name="state"/>
                                             <field name="evidence"/>
                                             <field name="scoring_criteria"/>
                                             <field name="status"/>
                                             <field name="observation"/>
                                             <field name="action"/>
+                                            <field name="state"/>
+                                            <button name="mark_as_not_applicable" type="object" string="Mark N/A"
+                                                    icon="fa-ban" attrs="{'invisible': [('state', '=', 'na')]}"/>
                                         </tree>
                                     </field>
                                 </page>
