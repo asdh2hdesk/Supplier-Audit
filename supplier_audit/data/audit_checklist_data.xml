@@ -19,7 +19,7 @@
         <record id="category_quality_control" model="audit.question.category">
             <field name="name">Production Readiness</field>
             <field name="sequence">4</field>
-            <field name="description">Production Readiness</field>
+            <field name="description">Questions related to Production Readiness</field>
         </record>
 <!--        <record id="checklist_default_supplier_audit" model="audit.checklist">-->
 <!--            <field name="name">Default Supplier Audit Checklist</field>-->
