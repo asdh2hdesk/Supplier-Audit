@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-<!--        <record id="category_general" model="audit.question.category">-->
-<!--            <field name="name">General</field>-->
-<!--            <field name="sequence">10</field>-->
-<!--            <field name="description">General audit questions</field>-->
-<!--        </record>-->
-<!--        <record id="category_quality_control" model="audit.question.category">-->
-<!--            <field name="name">Quality Control</field>-->
-<!--            <field name="sequence">20</field>-->
-<!--            <field name="description">Questions related to quality management</field>-->
-<!--        </record>-->
+        <record id="category_general" model="audit.question.category">
+            <field name="name">Management</field>
+            <field name="sequence">1</field>
+            <field name="description">Questions related to Management</field>
+        </record>
+        <record id="category_quality_control" model="audit.question.category">
+            <field name="name">Manufacturing</field>
+            <field name="sequence">2</field>
+            <field name="description">Questions related to Manufacturing</field>
+        </record>
+        <record id="category_quality_control" model="audit.question.category">
+            <field name="name">Quality Assurance &amp; Process</field>
+            <field name="sequence">3</field>
+            <field name="description">Questions related to Quality Assurance &amp; Process</field>
+        </record>
+        <record id="category_quality_control" model="audit.question.category">
+            <field name="name">Production Readiness</field>
+            <field name="sequence">4</field>
+            <field name="description">Production Readiness</field>
+        </record>
 <!--        <record id="checklist_default_supplier_audit" model="audit.checklist">-->
 <!--            <field name="name">Default Supplier Audit Checklist</field>-->
 <!--            <field name="code">SA-001</field>-->

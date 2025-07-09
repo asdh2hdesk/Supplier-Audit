@@ -105,24 +105,24 @@ class SupplierAudit(models.Model):
     category_2_id = fields.Many2one('audit.question.category', string='Category 2')
     category_3_id = fields.Many2one('audit.question.category', string='Category 3')
     category_4_id = fields.Many2one('audit.question.category', string='Category 4')
-    category_5_id = fields.Many2one('audit.question.category', string='Category 5')
-    category_6_id = fields.Many2one('audit.question.category', string='Category 6')
-    category_7_id = fields.Many2one('audit.question.category', string='Category 7')
-    category_8_id = fields.Many2one('audit.question.category', string='Category 8')
-    category_9_id = fields.Many2one('audit.question.category', string='Category 9')
-    category_10_id = fields.Many2one('audit.question.category', string='Category 10')
+    # category_5_id = fields.Many2one('audit.question.category', string='Category 5')
+    # category_6_id = fields.Many2one('audit.question.category', string='Category 6')
+    # category_7_id = fields.Many2one('audit.question.category', string='Category 7')
+    # category_8_id = fields.Many2one('audit.question.category', string='Category 8')
+    # category_9_id = fields.Many2one('audit.question.category', string='Category 9')
+    # category_10_id = fields.Many2one('audit.question.category', string='Category 10')
 
     # Category Name fields - Still computed
     category_1_name = fields.Char('Category 1 Name', compute='_compute_category_names', store=True)
     category_2_name = fields.Char('Category 2 Name', compute='_compute_category_names', store=True)
     category_3_name = fields.Char('Category 3 Name', compute='_compute_category_names', store=True)
     category_4_name = fields.Char('Category 4 Name', compute='_compute_category_names', store=True)
-    category_5_name = fields.Char('Category 5 Name', compute='_compute_category_names', store=True)
-    category_6_name = fields.Char('Category 6 Name', compute='_compute_category_names', store=True)
-    category_7_name = fields.Char('Category 7 Name', compute='_compute_category_names', store=True)
-    category_8_name = fields.Char('Category 8 Name', compute='_compute_category_names', store=True)
-    category_9_name = fields.Char('Category 9 Name', compute='_compute_category_names', store=True)
-    category_10_name = fields.Char('Category 10 Name', compute='_compute_category_names', store=True)
+    # category_5_name = fields.Char('Category 5 Name', compute='_compute_category_names', store=True)
+    # category_6_name = fields.Char('Category 6 Name', compute='_compute_category_names', store=True)
+    # category_7_name = fields.Char('Category 7 Name', compute='_compute_category_names', store=True)
+    # category_8_name = fields.Char('Category 8 Name', compute='_compute_category_names', store=True)
+    # category_9_name = fields.Char('Category 9 Name', compute='_compute_category_names', store=True)
+    # category_10_name = fields.Char('Category 10 Name', compute='_compute_category_names', store=True)
 
     # Category question line fields
     category_1_question_ids = fields.One2many('supplier.audit.question.line',
@@ -133,18 +133,18 @@ class SupplierAudit(models.Model):
                                               compute='_compute_category_question_lines')
     category_4_question_ids = fields.One2many('supplier.audit.question.line',
                                               compute='_compute_category_question_lines')
-    category_5_question_ids = fields.One2many('supplier.audit.question.line',
-                                              compute='_compute_category_question_lines')
-    category_6_question_ids = fields.One2many('supplier.audit.question.line',
-                                              compute='_compute_category_question_lines')
-    category_7_question_ids = fields.One2many('supplier.audit.question.line',
-                                              compute='_compute_category_question_lines')
-    category_8_question_ids = fields.One2many('supplier.audit.question.line',
-                                              compute='_compute_category_question_lines')
-    category_9_question_ids = fields.One2many('supplier.audit.question.line',
-                                              compute='_compute_category_question_lines')
-    category_10_question_ids = fields.One2many('supplier.audit.question.line',
-                                               compute='_compute_category_question_lines')
+    # category_5_question_ids = fields.One2many('supplier.audit.question.line',
+    #                                           compute='_compute_category_question_lines')
+    # category_6_question_ids = fields.One2many('supplier.audit.question.line',
+    #                                           compute='_compute_category_question_lines')
+    # category_7_question_ids = fields.One2many('supplier.audit.question.line',
+    #                                           compute='_compute_category_question_lines')
+    # category_8_question_ids = fields.One2many('supplier.audit.question.line',
+    #                                           compute='_compute_category_question_lines')
+    # category_9_question_ids = fields.One2many('supplier.audit.question.line',
+    #                                           compute='_compute_category_question_lines')
+    # category_10_question_ids = fields.One2many('supplier.audit.question.line',
+    #                                            compute='_compute_category_question_lines')
 
     # Category scoring fields for all 10 categories
     category_1_total_questions = fields.Integer('Category 1 Questions', compute='_compute_category_scores', store=True,
@@ -233,7 +233,7 @@ class SupplierAudit(models.Model):
         for rec in self:
             try:
                 # Initialize all scores to 0
-                for i in range(1, 11):
+                for i in range(1, 5):
                     setattr(rec, f'category_{i}_total_questions', 0)
                     setattr(rec, f'category_{i}_total_score', 0)
                     setattr(rec, f'category_{i}_max_score', 0)
@@ -255,7 +255,7 @@ class SupplierAudit(models.Model):
                     category_stats[cat_id]['max_score'] += 3  # Each question has max score of 3
 
                 # Map stats to category fields
-                for i in range(1, 11):
+                for i in range(1, 5):
                     category = getattr(rec, f'category_{i}_id')
                     if category and category.id in category_stats:
                         stats = category_stats[category.id]
@@ -270,14 +270,14 @@ class SupplierAudit(models.Model):
             except Exception as e:
                 _logger.error(f"Error computing category scores: {e}")
                 # If error occurs, set all to 0
-                for i in range(1, 11):
+                for i in range(1, 5):
                     setattr(rec, f'category_{i}_percentage', 0.0)
 
     def get_category_data(self):
         """Returns structured data for all categories for use in views"""
         self.ensure_one()
         categories = []
-        for i in range(1, 11):
+        for i in range(1, 5):
             category_id = getattr(self, f'category_{i}_id')
             if not category_id:
                 continue
@@ -292,12 +292,13 @@ class SupplierAudit(models.Model):
             })
         return categories
 
-    @api.depends('category_1_id', 'category_2_id', 'category_3_id', 'category_4_id', 'category_5_id',
-                 'category_6_id', 'category_7_id', 'category_8_id', 'category_9_id', 'category_10_id')
+    @api.depends('category_1_id', 'category_2_id', 'category_3_id', 'category_4_id',
+                 # 'category_5_id','category_6_id', 'category_7_id', 'category_8_id', 'category_9_id', 'category_10_id'
+                 )
     def _compute_category_names(self):
         for rec in self:
             try:
-                for i in range(10):
+                for i in range(4):
                     category_field = f'category_{i + 1}_id'
                     name_field = f'category_{i + 1}_name'
 
@@ -312,14 +313,14 @@ class SupplierAudit(models.Model):
                 _logger = logging.getLogger(__name__)
                 _logger.error(f"Error in _compute_category_names: {e}")
 
-                for i in range(10):
+                for i in range(4):
                     setattr(rec, f'category_{i + 1}_name', '')
 
     @api.depends('question_line_ids.category_id')
     def _compute_category_question_lines(self):
         for rec in self:
             try:
-                for i in range(10):
+                for i in range(4):
                     category_field = f'category_{i + 1}_id'
                     question_field = f'category_{i + 1}_question_ids'
 
@@ -339,21 +340,23 @@ class SupplierAudit(models.Model):
                 _logger = logging.getLogger(__name__)
                 _logger.error(f"Error in _compute_category_question_lines: {e}")
 
-                for i in range(10):
+                for i in range(4):
                     setattr(rec, f'category_{i + 1}_question_ids',
                             self.env['supplier.audit.question.line'])
 
-    @api.onchange('category_1_id', 'category_2_id', 'category_3_id', 'category_4_id', 'category_5_id',
-                  'category_6_id', 'category_7_id', 'category_8_id', 'category_9_id', 'category_10_id')
+    @api.onchange('category_1_id', 'category_2_id', 'category_3_id', 'category_4_id',
+                  # 'category_5_id','category_6_id', 'category_7_id', 'category_8_id', 'category_9_id', 'category_10_id'
+                  )
     def _onchange_categories(self):
         """Update question lines when categories are changed"""
         for rec in self:
             # Get all current categories
             current_categories = [
                 rec.category_1_id, rec.category_2_id, rec.category_3_id,
-                rec.category_4_id, rec.category_5_id, rec.category_6_id,
-                rec.category_7_id, rec.category_8_id, rec.category_9_id,
-                rec.category_10_id
+                rec.category_4_id,
+                # rec.category_5_id, rec.category_6_id,
+                # rec.category_7_id, rec.category_8_id, rec.category_9_id,
+                # rec.category_10_id
             ]
 
             # Update category names
@@ -365,9 +368,10 @@ class SupplierAudit(models.Model):
             # Get all current categories
             current_categories = [
                 rec.category_1_id, rec.category_2_id, rec.category_3_id,
-                rec.category_4_id, rec.category_5_id, rec.category_6_id,
-                rec.category_7_id, rec.category_8_id, rec.category_9_id,
-                rec.category_10_id
+                rec.category_4_id,
+                # rec.category_5_id, rec.category_6_id,
+                # rec.category_7_id, rec.category_8_id, rec.category_9_id,
+                # rec.category_10_id
             ]
 
             # Assign each question to one of the current categories
