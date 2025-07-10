@@ -11,15 +11,15 @@
             <field name="sequence">2</field>
             <field name="description">Questions related to Manufacturing</field>
         </record>
-        <record id="category_quality_assurance" model="audit.question.category">
-            <field name="name">Quality Assurance &amp; Process</field>
-            <field name="sequence">3</field>
-            <field name="description">Questions related to Quality Assurance &amp; Process</field>
-        </record>
         <record id="category_production_readiness" model="audit.question.category">
             <field name="name">Production Readiness</field>
-            <field name="sequence">4</field>
+            <field name="sequence">3</field>
             <field name="description">Questions related to Production Readiness</field>
+        </record>
+        <record id="category_quality_assurance" model="audit.question.category">
+            <field name="name">Quality Assurance &amp; Process</field>
+            <field name="sequence">4</field>
+            <field name="description">Questions related to Quality Assurance &amp; Process</field>
         </record>
 <!--        <record id="checklist_default_supplier_audit" model="audit.checklist">-->
 <!--            <field name="name">Default Supplier Audit Checklist</field>-->

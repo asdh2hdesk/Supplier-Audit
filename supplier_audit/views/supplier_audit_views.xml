@@ -263,7 +263,7 @@
                                         </tree>
                                     </field>
                                 </page>
-                                <page string="Quality Assurance &amp;Process Control"
+                                <page string="Quality Assurance &amp;Process"
                                       attrs="{'invisible': [('category_4_id','=',False)]}">
                                     <group>
                                         <!--                                        <label string="Category Statistics" class="o_form_label"/>-->

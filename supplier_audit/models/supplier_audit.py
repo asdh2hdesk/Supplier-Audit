@@ -442,7 +442,7 @@ class SupplierAudit(models.Model):
         # Create question lines based on the selected checklist
         if audit.checklist_id:
             # Define the desired category order
-            desired_categories = ['Management', 'Manufacturing','Production Readiness', 'Quality Assurance &  Process',]
+            desired_categories = ['Management', 'Manufacturing','Production Readiness', 'Quality Assurance & Process']
             category_records = self.env['audit.question.category'].search([
                 ('name', 'in', desired_categories)
             ])
