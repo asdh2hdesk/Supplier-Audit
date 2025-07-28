@@ -12,7 +12,7 @@
         * Track corrective actions
         * Generate audit reports
     """,
-    'author': 'ASD',
+    'author': 'Rakesh ASD',
     'website': 'https://www.asdsoftwares.com',
     'depends': ['base', 'purchase', 'contacts', 'mail','web'],
     'data': [
