@@ -40,14 +40,22 @@
                         </group>
                         <group>
                             <field name="total_questions" readonly="1"/>
-                            <field name="category_ids" widget="many2many_tags"/>
+                            <!--                            <field name="category_ids" widget="many2many_tags"/>-->
                         </group>
                     </group>
                     <notebook>
                         <page string="Questions">
+                            <group>
+                                <field name="uploaded_excel_file" filename="uploaded_file_name"/>
+                                <button name="action_upload_questions"
+                                        type="object"
+                                        string="Upload Questions"
+                                        class="btn-primary"
+                                        icon="fa-upload"/>
+                            </group>
                             <field name="question_ids">
                                 <tree string="Questions" editable="bottom">
-                                    <field name="sequence" widget="handle"/>
+                                    <!-- <field name="sequence"/>-->
                                     <field name="sl_no"/>
                                     <field name="category_id"/>
                                     <field name="name"/>
@@ -56,106 +64,130 @@
                                     <field name="status"/>
                                     <field name="observation"/>
                                     <field name="action"/>
-<!--                                    <field name="question_type"/>-->
-<!--                                    <field name="weight"/>-->
-<!--                                    <field name="reference"/>-->
+                                    <!--                                    <field name="question_type"/>-->
+                                    <!--                                    <field name="weight"/>-->
+                                    <!--                                    <field name="reference"/>-->
                                 </tree>
-<!--                                <form string="Question">-->
-<!--                                    <group>-->
-<!--                                        <group>-->
-<!--                                            <field name="sequence"/>-->
-<!--                                            <field name="name"/>-->
-<!--                                            <field name="category_id"/>-->
-<!--&lt;!&ndash;                                            <field name="question_type"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <field name="reference"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <field name="weight"/>&ndash;&gt;-->
-<!--                                        </group>-->
-<!--                                        <group>-->
-<!--                                            <field name="status"/>-->
-<!--                                            <field name="evidence"/>-->
-<!--                                            <field name="scoring_criteria"/>-->
-<!--                                        </group>-->
-<!--                                    </group>-->
-<!--&lt;!&ndash;                                    <group string="Guidance">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <field name="guidance" nolabel="1" placeholder="Add guidance or instructions for this question..."/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    </group>&ndash;&gt;-->
-<!--                                    <group string="Audit Details">-->
-<!--                                        <field name="observation" placeholder="Enter observations noted during the audit..."/>-->
-<!--                                        <field name="action" placeholder="Enter actions to be taken based on audit findings..."/>-->
-<!--                                    </group>-->
-<!--                                </form>-->
+                                <!--                                <form string="Question">-->
+                                <!--                                    <group>-->
+                                <!--                                        <group>-->
+                                <!--                                            <field name="sequence"/>-->
+                                <!--                                            <field name="name"/>-->
+                                <!--                                            <field name="category_id"/>-->
+                                <!--&lt;!&ndash;                                            <field name="question_type"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                            <field name="reference"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                            <field name="weight"/>&ndash;&gt;-->
+                                <!--                                        </group>-->
+                                <!--                                        <group>-->
+                                <!--                                            <field name="status"/>-->
+                                <!--                                            <field name="evidence"/>-->
+                                <!--                                            <field name="scoring_criteria"/>-->
+                                <!--                                        </group>-->
+                                <!--                                    </group>-->
+                                <!--&lt;!&ndash;                                    <group string="Guidance">&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                        <field name="guidance" nolabel="1" placeholder="Add guidance or instructions for this question..."/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;                                    </group>&ndash;&gt;-->
+                                <!--                                    <group string="Audit Details">-->
+                                <!--                                        <field name="observation" placeholder="Enter observations noted during the audit..."/>-->
+                                <!--                                        <field name="action" placeholder="Enter actions to be taken based on audit findings..."/>-->
+                                <!--                                    </group>-->
+                                <!--                                </form>-->
                             </field>
                         </page>
                         <page string="Description">
                             <field name="description" placeholder="Add a detailed description about this checklist..."/>
                         </page>
+
+                        <!--                         <page string="Upload Excel">-->
+                        <!--                             <group>-->
+                        <!--                                 <field name="uploaded_excel_file" filename="uploaded_file_name"/>-->
+                        <!--                                 <button name="action_upload_questions"-->
+                        <!--                                         type="object"-->
+                        <!--                                         string="Upload Questions"-->
+                        <!--                                         class="btn-primary"-->
+                        <!--                                         icon="fa-upload"/>-->
+                        <!--                             </group>-->
+                        <!--                         </page>-->
+
+
+                        <!--                        <page string="Upload" groups="base.group_user">-->
+                        <!--                            <group>-->
+                        <!--                                <field name="upload_category"/>-->
+                        <!--                                <field name="upload_question_id"/>-->
+                        <!--                                <field name="upload_evidence"/>-->
+                        <!--                                <field name="upload_scoring_criteria"/>-->
+                        <!--                            </group>-->
+                        <!--                        </page>-->
+
+
+                        Button
                     </notebook>
                 </sheet>
-<!--                <div class="oe_chatter">-->
-<!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
-<!--                    <field name="activity_ids" widget="mail_activity"/>-->
-<!--                    <field name="message_ids" widget="mail_thread"/>-->
-<!--                </div>-->
+                <!--                <div class="oe_chatter">-->
+                <!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+                <!--                    <field name="activity_ids" widget="mail_activity"/>-->
+                <!--                    <field name="message_ids" widget="mail_thread"/>-->
+                <!--                </div>-->
             </form>
         </field>
     </record>
 
     <!-- Audit Question Categories Form View -->
-<!--    <record id="view_question_category_form" model="ir.ui.view">-->
-<!--        <field name="name">audit.question.category.form</field>-->
-<!--        <field name="model">audit.question.category</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <form string="Question Category">-->
-<!--                <sheet>-->
-<!--                    <group>-->
-<!--                        <group>-->
-<!--                            <field name="name" placeholder="e.g. Quality Control"/>-->
-<!--                            <field name="sequence"/>-->
-<!--                            <field name="color" widget="color_picker"/>-->
-<!--                        </group>-->
-<!--                        <group>-->
-<!--                            <field name="question_count" readonly="1"/>-->
-<!--                        </group>-->
-<!--                    </group>-->
-<!--                    <separator string="Description"/>-->
-<!--                        <field name="description" placeholder="Describe the purpose of this category..."/>-->
+    <!--    <record id="view_question_category_form" model="ir.ui.view">-->
+    <!--        <field name="name">audit.question.category.form</field>-->
+    <!--        <field name="model">audit.question.category</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <form string="Question Category">-->
+    <!--                <sheet>-->
+    <!--                    <group>-->
+    <!--                        <group>-->
+    <!--                            <field name="name" placeholder="e.g. Quality Control"/>-->
+    <!--                            <field name="sequence"/>-->
+    <!--                            <field name="color" widget="color_picker"/>-->
+    <!--                        </group>-->
+    <!--                        <group>-->
+    <!--                            <field name="question_count" readonly="1"/>-->
+    <!--                        </group>-->
+    <!--                    </group>-->
+    <!--                    <separator string="Description"/>-->
+    <!--                        <field name="description" placeholder="Describe the purpose of this category..."/>-->
 
-<!--                    <notebook>-->
-<!--                        <page string="Questions">-->
-<!--                            <field name="question_ids" readonly="1">-->
-<!--                                <tree string="Questions">-->
-<!--                                    <field name="sequence"/>-->
-<!--                                    <field name="name"/>-->
-<!--                                    <field name="evidence"/>-->
-<!--                                    <field name="scoring_criteria"/>-->
-<!--                                    <field name="status"/>-->
-<!--                                    <field name="observation"/>-->
-<!--                                    <field name="action"/>-->
-<!--&lt;!&ndash;                                    <field name="question_type"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <field name="reference"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <field name="weight"/>&ndash;&gt;-->
-<!--                                </tree>-->
-<!--                            </field>-->
-<!--                        </page>-->
-<!--                    </notebook>-->
-<!--                </sheet>-->
-<!--            </form>-->
-<!--        </field>-->
-<!--    </record>-->
+    <!--                    <notebook>-->
+    <!--                        <page string="Questions">-->
+    <!--                            <field name="question_ids" readonly="1">-->
+    <!--                                <tree string="Questions">-->
+    <!--                                    <field name="sequence"/>-->
+    <!--                                    <field name="name"/>-->
+    <!--                                    <field name="evidence"/>-->
+    <!--                                    <field name="scoring_criteria"/>-->
+    <!--                                    <field name="status"/>-->
+    <!--                                    <field name="observation"/>-->
+    <!--                                    <field name="action"/>-->
+    <!--&lt;!&ndash;                                    <field name="question_type"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                    <field name="reference"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                    <field name="weight"/>&ndash;&gt;-->
+    <!--                                </tree>-->
+    <!--                            </field>-->
+    <!--                        </page>-->
+    <!--                    </notebook>-->
+    <!--                </sheet>-->
+    <!--            </form>-->
+    <!--        </field>-->
+    <!--    </record>-->
 
     <!-- Audit Question Categories Tree View -->
-<!--    <record id="view_question_category_tree" model="ir.ui.view">-->
-<!--        <field name="name">audit.question.category.tree</field>-->
-<!--        <field name="model">audit.question.category</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <tree string="Question Categories">-->
-<!--                <field name="name"/>-->
-<!--                <field name="sequence" widget="handle"/>-->
-<!--                <field name="question_count"/>-->
-<!--                <field name="color" widget="color"/>-->
-<!--            </tree>-->
-<!--        </field>-->
-<!--    </record>-->
+    <!--    <record id="view_question_category_tree" model="ir.ui.view">-->
+    <!--        <field name="name">audit.question.category.tree</field>-->
+    <!--        <field name="model">audit.question.category</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <tree string="Question Categories">-->
+    <!--                <field name="name"/>-->
+    <!--                <field name="sequence" widget="handle"/>-->
+    <!--                <field name="question_count"/>-->
+    <!--                <field name="color" widget="color"/>-->
+    <!--            </tree>-->
+    <!--        </field>-->
+    <!--    </record>-->
 
     <!-- Audit Checklist Search View -->
     <record id="view_audit_checklist_search" model="ir.ui.view">
@@ -169,7 +201,8 @@
                 <filter string="Active" name="active" domain="[('active','=',True)]"/>
                 <filter string="Archived" name="archived" domain="[('active','=',False)]"/>
                 <group expand="0" string="Group By">
-                    <filter string="Categories" name="group_by_category" context="{'group_by': 'category_ids'}"/>
+                    <filter string="Company" name="group_by_company" context="{'group_by': 'company_id'}"/>
+                    <!--                    <filter string="Categories" name="group_by_category" context="{'group_by': 'category_ids'}"/>-->
                 </group>
             </search>
         </field>
@@ -181,12 +214,8 @@
         <field name="res_model">audit.checklist</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create your first audit checklist
-            </p>
-            <p>
-                Define checklists to standardize supplier audit questions and ensure consistent evaluations.
-            </p>
+            <p class="o_view_nocontent_smiling_face">Create your first audit checklist</p>
+            <p>Define checklists to standardize supplier audit questions and ensure consistent evaluations.</p>
         </field>
     </record>
 
